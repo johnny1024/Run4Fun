@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hello.apps.HelloConfig',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,16 @@ DATABASES = {
         'PORT' : '',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#         'USER' : 'admin',
+#         'PASSWORD' : 'admin',
+#         'HOST' : 'localhost',
+#         'PORT' : '',
+#     }
+# }
 
 
 # Password validation
