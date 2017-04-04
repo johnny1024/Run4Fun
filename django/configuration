@@ -1,0 +1,33 @@
+pip install django / y python-django
+y python-psycopg2
+y postgresql
+
+
+https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
+
+# sudo -u postgres -i
+You should now be in a shell session for the postgres user.
+# initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'
+# exit
+
+# sudo systemctl start postgresql
+# sudo systemctl status postresql
+
+# sudo -u postgres -i
+Log into a Postgres session by typing:
+# psql
+
+
+*** user: admin
+passwd: admin
+
+CREATE DATABASE run4fundb;
+
+python manage.py makemigrations
+python manage.py migrate
+
+-----
+python manage.py createsuperuser
+username: admin
+email: pralatmarta@gmail.com
+password: adminadmin
