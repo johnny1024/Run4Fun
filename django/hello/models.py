@@ -14,3 +14,4 @@ class User(models.Model):
 class Workout(models.Model):
     date = models.DateField(null=True)
     user = User.pk
+    title = models.CharField(max_length=30, null=True)
