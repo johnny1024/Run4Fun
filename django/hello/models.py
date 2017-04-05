@@ -13,5 +13,5 @@ class User(models.Model):
 
 class Workout(models.Model):
     date = models.DateField(null=True)
-    user = User.pk
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=30, null=True)
