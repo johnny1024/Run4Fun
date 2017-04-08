@@ -26,9 +26,9 @@ class WorkoutCalendar(HTMLCalendar):
                     body.append(esc(workout.title))
                     body.append('</li>')
                 body.append('</ul>')
-                print("FINAL ccs_class" + " " +  cssclass)
+                # print("FINAL ccs_class" + " " +  cssclass)
                 return self.day_cell(cssclass, '%d %s' % (day, ''.join(body)))
-            print("FINAL ccs_class" + " " + cssclass)
+            # print("FINAL ccs_class" + " " + cssclass)
             return self.day_cell(cssclass, day)
         return self.day_cell('noday', '&nbsp;')
 
