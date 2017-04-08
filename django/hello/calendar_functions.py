@@ -13,6 +13,7 @@ class WorkoutCalendar(HTMLCalendar):
     def formatday(self, day, weekday):
         if day != 0:
             cssclass = self.cssclasses[weekday]
+            cssclass += ' day'
             if date.today() == date(self.year, self.month, day):
                 cssclass += ' today'
             if day in self.workouts:
@@ -20,13 +21,14 @@ class WorkoutCalendar(HTMLCalendar):
                 body = ['<ul>']
                 for workout in self.workouts[day]:
                     body.append('<li>')
-                    # body.append('<a href="%s">' % workout.get_absolute_url())
                     body.append(workout.user.name)
                     body.append (" ")
                     body.append(esc(workout.title))
                     body.append('</li>')
                 body.append('</ul>')
+                print("FINAL ccs_class" + " " +  cssclass)
                 return self.day_cell(cssclass, '%d %s' % (day, ''.join(body)))
+            print("FINAL ccs_class" + " " + cssclass)
             return self.day_cell(cssclass, day)
         return self.day_cell('noday', '&nbsp;')
 

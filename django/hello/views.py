@@ -10,14 +10,10 @@ from django.utils.safestring import mark_safe
 
 def index(request):
     latest_users_list = User.objects.order_by('-name')
-    template = loader.get_template('hello/index.html')
-    context = { 'latest_users_list': latest_users_list,
-                }
-    # return HttpResponse(template.render(context, request))
+    context = { 'latest_users_list': latest_users_list,}
     return render(request, 'hello/index.html', context)
 
 def display_user(request, user_id):
-    # return HttpResponse("You're looking at user" + str(user_id))
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:
@@ -26,11 +22,10 @@ def display_user(request, user_id):
 
 
 def calendar(request, year, month):
-
   month = int(month)
   year = int(year)
   my_workouts = Workout.objects.order_by('id').filter(
     date__year=year, date__month=month
   )
   cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
-  return render_to_response('hello/my_template.html', {'calendar': mark_safe(cal),})
+  return render_to_response('hello/my_template.html', {'calendar': mark_safe(cal), })

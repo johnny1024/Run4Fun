@@ -1,0 +1,12 @@
+.day {
+    border: solid 0.5px black;
+    width: 20px;
+    height: 15px;
+}
+.today {
+    background: cornflowerblue;
+}
+
+.filled{
+    background: cyan;
+}
