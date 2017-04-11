@@ -1,0 +1,17 @@
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra" xmlns:m="http://ant.apache.org/ivy/maven">
+  <info organisation="pypi" module="Django" revision="1.11" />
+  <configurations>
+    <conf name="argon2" description="auto generated configuration for argon2" extends="default" />
+    <conf name="default" description="auto generated configuration for default" />
+    <conf name="source" description="auto generated configuration for source" extends="default" />
+    <conf name="bcrypt" description="auto generated configuration for bcrypt" extends="default" />
+  </configurations>
+  <publications>
+    <artifact name="Django" ext="tar.gz" conf="default" type="tar.gz" />
+  </publications>
+  <dependencies defaultconfmapping="*-&gt;default">
+    <dependency org="pypi" name="pytz" rev="2017.2" conf="default" />
+    <dependency org="pypi" name="argon2_cffi" rev="16.1.0" conf="argon2" />
+    <dependency org="pypi" name="bcrypt" rev="3.1.3" conf="bcrypt" />
+  </dependencies>
+</ivy-module>
