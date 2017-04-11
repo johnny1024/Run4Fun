@@ -1,0 +1,12 @@
+plugins {
+    id "com.linkedin.python-cli" version "0.4.9"
+}
+
+dependencies {
+    python 'pypi:Django:1.7'
+    test 'pypi:mock:2.0.0'
+}
+
+repositories {
+    pyGradlePyPi()
+}
