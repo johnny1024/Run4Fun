@@ -18,14 +18,11 @@ class WorkoutCalendar(HTMLCalendar):
                 cssclass += ' today'
             if day in self.workouts:
                 cssclass += ' filled'
-                body = ['<ul>']
+                body = ['<div class=\"container"><div class=\"filler\"></div>']
                 for workout in self.workouts[day]:
-                    body.append('<li>')
-                    body.append(workout.user.name)
-                    body.append (" ")
-                    body.append(esc(workout.title))
-                    body.append('</li>')
-                body.append('</ul>')
+                    body.append(self.create_day_with_workouts(workout))
+                body.append('<div hidden class=\'training\'>Click to see the trainings!</div>')
+                body.append('</div>')
                 # print("FINAL ccs_class" + " " +  cssclass)
                 return self.day_cell(cssclass, '%d %s' % (day, ''.join(body)))
             # print("FINAL ccs_class" + " " + cssclass)
@@ -44,3 +41,12 @@ class WorkoutCalendar(HTMLCalendar):
 
     def day_cell(self, cssclass, body):
         return '<td class="%s">%s</td>' % (cssclass, body)
+
+    def create_day_with_workouts(self, workout):
+        body = '<div class=workout_info><ul>'
+        body += '<li>User: ' + (workout.user.name)
+        body += "</li><li>"
+        body += 'Workout: ' + esc(workout.title)
+        body += '</li></ul></div>'
+
+        return body
