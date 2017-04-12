@@ -1,2 +1,3 @@
 run test:
-./manage.py test
+$ pytest
+
