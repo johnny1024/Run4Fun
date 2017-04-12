@@ -1,3 +1,3 @@
 run test:
-$ pytest
+$ ./gradlwe pytest
 
