@@ -210,3 +210,4 @@ PID
 pinned.txt
 db.sqlite3
 .idea
+test_results.xml

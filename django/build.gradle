@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     python 'pypi:Django:1.11'
+    python 'pypi:pytest-django:3.1.2'
 }
 
 repositories {
@@ -27,7 +28,7 @@ python {
         virtualEnvPrompt = "(${project.name})"
         activateLink = project.file("activate") // File you can source to activate the virtual env
 //        pythonVersion = '2.7' // Sets the version of python to use, will search your PATH to get the location
-//        systemPythonInterpreter = file("/path/to/python2.7") // used to force an interpreter to be used to build the venv
+//        systemPythonInterpreter = file("/usr/bin/python2.7") // used to force an interpreter to be used to build the venv
     }
 }
 
@@ -48,16 +49,17 @@ def createExecTask(taskName, command) {
 }
 
 createVenvExecTask('runServer', "./manage.py runserver & echo \$! > ${projectDir}/PID")
-createVenvExecTask('runTests', './manage.py test')
+createExecTask('_runServer', "./manage.py runserver & echo \$! > ${projectDir}/PID")
+
+createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
+createExecTask('_runTests', "py.test --junitxml ${projectDir}/test_results.xml")
+
 createExecTask('killServer', "pkill python") // Kills all python processes, not only the server one
 //createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/PID)\" | grep -o '[0-9]*')")
-createExecTask('_runServer', "./manage.py runserver & echo \$! > ${projectDir}/PID")
-createExecTask('_runTests', './manage.py test')
 
-[runServer, runTests].each { task -> task.dependsOn build }
+[runServer, runTests].each { task -> task.dependsOn assemble }
 
 installProject.enabled = false
 buildWheels.enabled = false
 buildPex.enabled = false
 flake8.enabled = false
-pytest.enabled = false
