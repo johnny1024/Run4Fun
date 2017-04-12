@@ -4,8 +4,8 @@ from itertools import groupby
 
 from django.utils.html import conditional_escape as esc
 
-class WorkoutCalendar(HTMLCalendar):
 
+class WorkoutCalendar(HTMLCalendar):
     def __init__(self, workouts):
         super(WorkoutCalendar, self).__init__()
         self.workouts = self.group_by_day(workouts)
