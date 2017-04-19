@@ -52,15 +52,16 @@ def createExecTask(taskName, command) {
     }
 }
 
-createVenvExecTask('runServer', "./manage.py runserver & echo \$! > ${projectDir}/PID")
+createVenvExecTask('runServer', "python -u manage.py runserver &> server.log & echo \$! > ${projectDir}/server.pid")
+createVenvExecTask('runServerFg', "python -u manage.py runserver |& tee server.log & echo \$! > ${projectDir}/server.pid")
 createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
 createVenvExecTask('genDoc', "pdoc --html-dir ${buildDir}/docs --overwrite --html run4fun &&" +
                              "pdoc --html-dir ${buildDir}/docs --overwrite --html hello")
 
 createExecTask('killServer', "pkill python") // Kills all python processes, not only the server one
-//createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/PID)\" | grep -o '[0-9]*')")
+//createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/server.pid)\" | grep -o '[0-9]*')")
 
-[runServer, runTests, genDoc].each { task -> task.dependsOn assemble }
+[runServer, runServerFg, runTests, genDoc].each { task -> task.dependsOn assemble }
 
 installProject.enabled = false
 buildWheels.enabled = false

@@ -206,7 +206,7 @@ crashlytics-build.properties
 fabric.properties
 
 activate
-PID
+server.pid
 pinned.txt
 db.sqlite3
 .idea
