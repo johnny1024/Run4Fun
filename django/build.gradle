@@ -52,8 +52,8 @@ def createExecTask(taskName, command) {
     }
 }
 
-createVenvExecTask('runServer', "python -u manage.py runserver &> server.log & echo \$! > ${projectDir}/server.pid")
-createVenvExecTask('runServerFg', "python -u manage.py runserver |& tee server.log & echo \$! > ${projectDir}/server.pid")
+createVenvExecTask('runServer', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) &> server.log")
+createVenvExecTask('runServerFg', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) |& tee server.log")
 createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
 createVenvExecTask('genDoc', "pdoc --html-dir ${buildDir}/docs --overwrite --html run4fun &&" +
                              "pdoc --html-dir ${buildDir}/docs --overwrite --html hello")
