@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hello.apps.HelloConfig',
+    'hello',
+    'workout_calendar',
+    'dashboard',
+    'login',
+    'profile_settings',
 ]
 
 MIDDLEWARE = [

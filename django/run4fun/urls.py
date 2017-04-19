@@ -18,6 +18,10 @@ from django.contrib import admin
 
 urlpatterns = [
     # if there's 'hello/' in our url request, will send the rest of the request to urls in hello app module
-    url(r'^hello/', include('hello.urls')),
+    # url(r'^hello/', include('hello.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^calendar/', include('workout_calendar.urls')),
+    url(r'^profile/', include('profile_settings.urls')),
+    url(r'^login/', include('login.urls')),
 ]
