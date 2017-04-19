@@ -25,7 +25,7 @@ SECRET_KEY = '_=r%y1sov9bf%th&sk9(w8d#4$llg0#q-tx^(f+-27sa(0u%+_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['run4fun.ddns.net', 'localhost', '0.0.0.0']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'hello.apps.HelloConfig',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -113,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 
 # Internationalization
