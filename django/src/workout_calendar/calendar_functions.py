@@ -20,7 +20,6 @@ class WorkoutCalendar(HTMLCalendar):
         super(WorkoutCalendar, self).__init__()
         self.workouts = self.group_by_day(workouts)
 
-
     def formatday(self, day, weekday):
         """
         This method forms appropriate day view.
@@ -80,7 +79,7 @@ class WorkoutCalendar(HTMLCalendar):
 
     def create_day_with_workouts(self, workout):
         body = '<div class=workout_info><ul>'
-        body += '<li>User: ' + (workout.user.name)
+        body += '<li>User: ' + workout.user.name
         body += "</li><li>"
         body += 'Workout: ' + esc(workout.title)
         body += '</li></ul></div>'

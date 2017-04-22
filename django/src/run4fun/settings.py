@@ -81,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'run4fundb',
-        'USER' : 'admin',
-        'PASSWORD' : 'admin',
-        'HOST' : 'localhost',
-        'PORT' : '',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 # DATABASES = {

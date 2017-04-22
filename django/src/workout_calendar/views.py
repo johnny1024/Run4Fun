@@ -1,5 +1,5 @@
 from .models import Workout
-from workout_calendar.calendar_functions import WorkoutCalendar
+from .calendar_functions import WorkoutCalendar
 from django.shortcuts import render_to_response
 from django.utils.safestring import mark_safe
 import datetime
