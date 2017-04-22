@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render_to_response
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the profile_settings index.")
+    # return HttpResponse("Hello, world. You're at the dashboard index.")
+    return render_to_response('profile_main.html')

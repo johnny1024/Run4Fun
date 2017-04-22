@@ -1,5 +1,8 @@
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'hello/calendar.css' %}" />
+<div class="basic">
+        {% include "main_menu.html" %}
+</div>
+<link rel="stylesheet" type="text/css" href="{% static 'calendar.css' %}" />
 
 {{ calendar }}

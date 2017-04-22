@@ -1,8 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import User, Workout
-from django.template import loader
-from django.http import Http404
+from .models import Workout
 from workout_calendar.calendar_functions import WorkoutCalendar
 from django.shortcuts import render_to_response
 from django.utils.safestring import mark_safe

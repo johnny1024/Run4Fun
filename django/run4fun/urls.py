@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^calendar/', include('workout_calendar.urls')),
     url(r'^profile/', include('profile_settings.urls')),
     url(r'^login/', include('login.urls')),
+    url(r'^$', include('dashboard.urls')),
 ]
