@@ -76,6 +76,7 @@ createExecTask('killServer', "pkill -x python") // Kills all python processes, n
 //createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/server.pid)\" | grep -o '[0-9]*')")
 
 [runServer, runServerFg, runTests, genDoc].each { task -> task.dependsOn assemble }
+clean.dependsOn removePycache
 
 installProject.enabled = false
 buildWheels.enabled = false
