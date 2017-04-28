@@ -31,7 +31,9 @@ class WorkoutCalendar(HTMLCalendar):
 
         Method returns day cell with appropriate appearance.
         """
+
         if day != 0:
+            cssid = str(self.year) + "/" + str(self.month) + "/" + str(day)
             cssclass = self.cssclasses[weekday]
             cssclass += ' day'
             if date.today() == date(self.year, self.month, day):
@@ -44,10 +46,10 @@ class WorkoutCalendar(HTMLCalendar):
                 body.append('<div hidden class=\'training\'>Click to see the trainings!</div>')
                 body.append('</div>')
                 # print("FINAL ccs_class" + " " +  cssclass)
-                return self.day_cell(cssclass, '%d %s' % (day, ''.join(body)))
+                return self.day_cell(cssclass, cssid, '%d %s' % (day, ''.join(body)))
             # print("FINAL ccs_class" + " " + cssclass)
-            return self.day_cell(cssclass, day)
-        return self.day_cell('noday', '&nbsp;')
+            return self.day_cell(cssclass, cssid, day)
+        return self.day_cell_no_id('noday', '&nbsp;')
 
     def formatmonth(self, year, month):
         """
@@ -74,7 +76,10 @@ class WorkoutCalendar(HTMLCalendar):
             [(day, list(items)) for day, items in groupby(workouts, field)]
         )
 
-    def day_cell(self, cssclass, body):
+    def day_cell(self, cssclass, cssid, body):
+        return '<td class="%s" id="%s">%s</td>' % (cssclass, cssid, body)
+
+    def day_cell_no_id(self, cssclass, body):
         return '<td class="%s">%s</td>' % (cssclass, body)
 
     def create_day_with_workouts(self, workout):

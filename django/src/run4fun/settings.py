@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'dashboard',
     'login',
     'profile_settings',
-    'common',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,10 +55,11 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'run4fun.urls'
 
+# Added DIRS for the templates folder - this way we don't need additional app.
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(os.path.dirname(os.path.realpath(__file__)),"../common/templates") ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,4 +137,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/common/static/'
+STATIC_URL = '/static/'
+'''
+Your project will probably also have static assets that aren't tied to a particular app. 
+In addition to using a static/ dir inside your apps, you can define a list of directories
+(STATICFILES_DIRS) in your settings file where Django will also look for static files.
+'''
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "../common/static"),
+    '../src/common/static/',
+)
+

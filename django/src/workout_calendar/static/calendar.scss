@@ -1,0 +1,60 @@
+/*@import "mystyle.css";*/
+@import "../../common/static/master";
+@import "../../common/static/common";
+
+
+html, body {
+    width: 100%;
+}
+
+/* DAYS */
+
+td {
+    background: $background-beige;
+    color: $blue-green;
+    border: 0.5px solid $blue-green;
+    text-align: left;
+    vertical-align: top;
+    font-family: $basic-font-family;
+    font-size: 18px;
+    font-weight: 100;
+    position: relative;
+}
+
+td:hover{
+    background: $background-beige;
+}
+
+.today {
+    background: $pink;
+    color: $background-beige;
+}
+
+.filled{
+    background: $lighter-blue;
+    color: $background-beige;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.training{
+    font-family: $basic-font-family;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+}
+
+.workout_info{
+    position: absolute;
+    /*bottom:0;*/
+    min-height:40px;
+    min-width: 100%;
+    display: flex;
+    color: $darker-blue;
+    font-family: $basic-font-family;
+    font-size: 12px;
+    text-align: right;
+}
