@@ -7,7 +7,7 @@ table {
     table-layout: fixed;
     border-collapse: collapse;
     margin: 0 auto;
-    border: 3px solid #048998;
+    border: 3px solid $blue-green;
     padding-top: 20px;
 }
 
@@ -18,8 +18,12 @@ th, td {
 
 /* HEADER */
 th {
-    background: #048998;
-    color:#F6F5F5;
-    border: 0.5px solid #F6F5F5;
-    font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 200; line-height: 32px; margin: 0 0 72px;
+    background: $blue-green;
+    color: $background-beige;
+    border: 0.5px solid $background-beige;
+    font-family: $basic-font-family;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 32px;
+    margin: 0 0 72px;
 }
