@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here.
-class User(models.Model):
+class Runner(models.Model):
     """
     Class that represents single user in application.
     It contains basic information about user.
@@ -32,5 +32,7 @@ class Workout(models.Model):
     `title`: short description of planned training.
     """
     date = models.DateField(null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    title = models.CharField(max_length=30, null=True)
+    distance = models.IntegerField(null=True)
+    comment = models.TextField(blank=True)
+    user = models.ForeignKey(Runner, on_delete=models.CASCADE, null=True)
+    done = models.BooleanField(default=False)

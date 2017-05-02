@@ -33,7 +33,8 @@ class WorkoutCalendar(HTMLCalendar):
         """
 
         if day != 0:
-            cssid = str(self.year) + "/" + str(self.month) + "/" + str(day)
+            cssid = str(self.year) + "-" + self.format_one_digit(self.month) + "-" + \
+                    self.format_one_digit(day)
             cssclass = self.cssclasses[weekday]
             cssclass += ' day'
             if date.today() == date(self.year, self.month, day):
@@ -86,7 +87,14 @@ class WorkoutCalendar(HTMLCalendar):
         body = '<div class=workout_info><ul>'
         body += '<li>User: ' + workout.user.name
         body += "</li><li>"
-        body += 'Workout: ' + esc(workout.title)
+        body += 'Workout: ' + esc(workout.comment)
         body += '</li></ul></div>'
 
         return body
+
+    def format_one_digit(self, string_to_format):
+        string_to_format = str(string_to_format)
+        if len(string_to_format) < 2:
+            return '0' + string_to_format
+        else:
+            return string_to_format

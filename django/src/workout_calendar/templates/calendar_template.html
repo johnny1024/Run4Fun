@@ -1,8 +1,9 @@
 {% load staticfiles %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" xmlns="http://www.w3.org/1999/html"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="{% static 'calendar.js' %}"></script>
+<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
 
 <link rel="stylesheet" type="text/css" href="{% static 'calendar.css' %}" />
 
@@ -12,3 +13,38 @@
 
 {{ calendar }}
 
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" id="workoutForm">
+        {% csrf_token %}
+        <fieldset>
+            <div class="form-group">
+                <label>Runner's Name</label>
+                    <input type="text" name="runner"/>
+            </div>
+            <div>
+                <label>Date</label>
+                    <input type="date" name="date" data-date="" data-date-format="DD MMMM YYYY"
+                           class="form-control" required="" readonly/>
+            </div>
+            <div>
+                <label>Distance</label>
+                    <input type="number" name="distance" required="" />
+            </div>
+            <div>
+                <label>Comment</label>
+                    <textarea name="comment" rows="4" cols="30" form="workoutForm"></textarea>
+            </div>
+                <div>
+                        <button id="updateBt" onclick="updateRecord()">Update</button>
+                </div>
+                <div>
+                        <button id="addBt" onclick="addRecord()">Add new workout</button>
+                </div>
+                <div>
+                        <button id="deleteBt" onclick="deleteRecord()">Delete a workout</button>
+                </div>
+        </fieldset>
+    </form>
+
+{% endblock %}
