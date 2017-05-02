@@ -67,6 +67,7 @@ task removePycache {
     }
 }
 
+
 createVenvExecTask('runServer', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) &> server.log")
 createVenvExecTask('runServerFg', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) |& tee server.log")
 createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
@@ -74,6 +75,8 @@ createVenvExecTask('genDoc', "pdoc --html-dir ${buildDir}/docs --overwrite --htm
 
 createExecTask('killServer', "pkill -x python") // Kills all python processes, not only the server one
 //createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/server.pid)\" | grep -o '[0-9]*')")
+
+createVenvExecTask('makeMigrations', "./manage.py makemigrations && ./manage.py migrate")
 
 [runServer, runServerFg, runTests, genDoc].each { task -> task.dependsOn assemble }
 clean.dependsOn removePycache
