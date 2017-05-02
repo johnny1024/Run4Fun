@@ -1,9 +1,25 @@
- <div class="main_container">
-        <ul>
-            <li><a href="/admin/">admin</a></li>
-            <li><a href="/login/">login</a></li>
-            <li><a href="/profile/">profile</a></li>
-            <li><a href="/calendar/">calendar</a></li>
-            <li><a href="/dashboard/">dashboard</a></li>
-        </ul>
- </div>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+
+<div>
+    <ul class="navbar">
+        {% if logged == True %}
+            {% block logged %}
+                <li id="dashboard"><a href="/dashboard/">Dashboard</a></li>
+                <li id="calendar"><a href="/calendar/">Calendar</a></li>
+                <li id="profile"><a href="/profile/">Profile</a></li>
+                <li id="logout" class="right"><a href="/logout/">Logout</a></li>
+            {% endblock %}
+        {% else %}
+            {% block not_logged %}
+                <li id="login"><a href="/login/">Login</a></li>
+            {% endblock %}
+        {% endif %}
+        <li class="right"><a href="/admin/">Admin</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    document.querySelector("#{{page}}").firstElementChild.classList.add('active');
+</script>

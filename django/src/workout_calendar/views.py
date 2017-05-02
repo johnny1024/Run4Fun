@@ -1,8 +1,9 @@
-from .models import Workout
-from .calendar_functions import WorkoutCalendar
+import datetime
 from django.shortcuts import render_to_response
 from django.utils.safestring import mark_safe
-import datetime
+
+from .calendar_functions import WorkoutCalendar
+from .models import Workout
 
 
 def calendar(request, year, month):
@@ -17,4 +18,7 @@ def calendar(request, year, month):
         date__year=year, date__month=month
     )
     cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
-    return render_to_response('calendar_template.html', {'calendar': mark_safe(cal), })
+    context = {'page': request.path.replace('/', ''),
+               'logged': request.session.test_cookie_worked(),
+               'calendar': mark_safe(cal)}
+    return render_to_response('calendar_template.html', context)

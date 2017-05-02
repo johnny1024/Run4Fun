@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
+
+from login.views import logout
 
 urlpatterns = [
     # if there's 'hello/' in our url request, will send the rest of the request to urls in hello app module
-    # url(r'^hello/', include('hello.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^calendar/', include('workout_calendar.urls')),
     url(r'^profile/', include('profile_settings.urls')),
     url(r'^login/', include('login.urls')),
-    url(r'^$', include('dashboard.urls')),
+    url(r'^logout/', logout),
+    url(r'^$', RedirectView.as_view(url='/dashboard/')),
 ]
