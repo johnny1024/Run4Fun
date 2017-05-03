@@ -1,5 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
 plugins {
     id "com.linkedin.python-cli" version "0.4.9"
+    id "org.kravemir.gradle.sass" version "1.2.3"
 }
 
 dependencies {
@@ -23,6 +32,7 @@ repositories {
         }
     }
 }
+
 
 python {
     srcDir = project.file('src').path // The location of this project's source directory.
@@ -67,7 +77,6 @@ task removePycache {
     }
 }
 
-
 createVenvExecTask('runServer', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) &> server.log")
 createVenvExecTask('runServerFg', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) |& tee server.log")
 createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
@@ -89,3 +98,34 @@ buildDocsHtml.enabled = false
 buildDocsJson.enabled = false
 packageDeployable.enabled = false
 generateCompletions.enabled = false
+
+// GENERATE CSS TASKS
+def matchingDirectories = [:]
+def srcDirName = '/' + file(python.srcDir).name + '/'
+file("${python.srcDir}").eachDirRecurse {
+    def moduleName = ''
+    if (it.path.indexOf(srcDirName) + srcDirName.length() < it.path.lastIndexOf('/'))
+        moduleName = it.path.substring(it.path.indexOf(srcDirName) + srcDirName.length(), it.path.lastIndexOf('/'))
+    def actualPath = it.path
+    def found = false
+    it.eachFile {
+        if (it.name.endsWith('.scss')) {
+            found = true
+        }
+    }
+    if (found) matchingDirectories << ["${moduleName}" : actualPath]
+}
+
+matchingDirectories.each { module ->
+    sass {
+        "${module.key}" {
+            srcDir = file("${module.value}")
+            outDir = file("${module.value}")
+            include = "**/*.scss"
+            exclude = "**/_*.scss"
+        }
+    }
+}
+
+task compileAllScss(dependsOn: tasks.matching {Task cssTask -> cssTask.name.endsWith("Sass")})
+assemble.dependsOn compileAllScss
