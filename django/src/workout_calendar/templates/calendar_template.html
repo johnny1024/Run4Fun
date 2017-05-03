@@ -25,24 +25,24 @@
             <div>
                 <label>Date</label>
                     <input type="date" name="date" data-date="" data-date-format="DD MMMM YYYY"
-                           class="form-control" required="" readonly/>
+                           class="form-control" readonly/>
             </div>
             <div>
                 <label>Distance</label>
-                    <input type="number" name="distance" required="" />
+                    <input type="number" name="distance"/>
             </div>
             <div>
                 <label>Comment</label>
                     <textarea name="comment" rows="4" cols="30" form="workoutForm"></textarea>
             </div>
                 <div>
-                        <button id="updateBt" onclick="updateRecord()">Update</button>
+                        <input type="submit" id="updateBt" value="update" onclick="sendFormRequest('update_workout')"/>
                 </div>
                 <div>
-                        <button id="addBt" onclick="addRecord()">Add new workout</button>
+                        <input type="submit" id="addBt" value="create" onclick="sendFormRequest('add_workout')"/>
                 </div>
                 <div>
-                        <button id="deleteBt" onclick="deleteRecord()">Delete a workout</button>
+                        <input type="submit"  id="deleteBt" value="delete" onclick="sendFormRequest('delete_workout')"/>
                 </div>
         </fieldset>
     </form>

@@ -2,6 +2,7 @@
  * Created by marta on 25.04.17.
  */
 
+
 window.onload = function() {
     $('#addBt').hide('fast');
     $('#updateBt').hide();
@@ -57,35 +58,11 @@ function getWorkoutByDate(date) {
     });
 }
 
-function updateRecord() {
-     $.ajax({
-        url: '/calendar/update_workout',
-        method: 'POST',
-        data: {
-            'content': $('#workoutForm').serialize(),
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success : function () {
-            response_args = arguments[0];
-        }
-    });
-}
-
-function addRecord() {
-     $.ajax({
-        url: '/calendar/add_workout',
-        method: 'POST',
-        data: $('#workoutForm').serialize(),
-        success : function () {
-            response_args = arguments[0];
-        }
-    });
-}
-
-function deleteRecord() {
-    $.ajax({
-        url: '/calendar/delete_workout',
-        method: 'POST',
+function sendFormRequest(type){
+    var request_url = '/calendar/' + type + '/';
+   $.ajax({
+        url: request_url,
+        type: "POST",
         data: $('#workoutForm').serialize(),
         success : function () {
             response_args = arguments[0];
