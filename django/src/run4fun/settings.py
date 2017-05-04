@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'dashboard',
     'login',
     'profile_settings',
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -141,3 +142,5 @@ In addition to using a static/ dir inside your apps, you can define a list of di
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "common/static"),
 )
+
+LOGIN_REDIRECT_URL = '/'
