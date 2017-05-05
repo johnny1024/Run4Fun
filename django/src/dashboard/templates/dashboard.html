@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-    <div class="basic">
-        {% include "base.html" %}
-    </div>
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
     <div>You are at dashboard index!</div>
-</body>
-</html>
+{% endblock %}

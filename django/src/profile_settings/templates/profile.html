@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your profile</title>
-</head>
-<body>
-    <div class="basic">
-        {% include "base.html" %}
-    </div>
-    <div>You are at profile_settings index!</div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div>You are at profile index!</div>
+{% endblock %}
