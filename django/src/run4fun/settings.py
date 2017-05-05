@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'workout_calendar',
     'dashboard',
     'home',
-    'profile_settings',
     'accounts',
 ]
 
