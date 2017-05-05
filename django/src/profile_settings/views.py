@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 
 
+@login_required
 def index(request):
-    context = {'page': request.path.replace('/', ''),
-               'logged': request.session.test_cookie_worked()}
-    return render_to_response('profile_main.html', context)
+    context = {'page': request.resolver_match.url_name,
+               'user': request.user}
+    return render_to_response('profile.html', context)

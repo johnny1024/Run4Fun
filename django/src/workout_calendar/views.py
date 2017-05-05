@@ -1,4 +1,5 @@
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.utils.safestring import mark_safe
 
@@ -6,6 +7,7 @@ from .calendar_functions import WorkoutCalendar
 from .models import Workout
 
 
+@login_required
 def calendar(request, year, month):
     now = datetime.datetime.now()
     if len(month) == 0:
@@ -18,7 +20,7 @@ def calendar(request, year, month):
         date__year=year, date__month=month
     )
     cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
-    context = {'page': request.path.replace('/', ''),
-               'logged': request.session.test_cookie_worked(),
+    context = {'page': request.resolver_match.url_name,
+               'user': request.user,
                'calendar': mark_safe(cal)}
-    return render_to_response('calendar_template.html', context)
+    return render_to_response('calendar.html', context)

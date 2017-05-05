@@ -4,16 +4,16 @@
 
 <div>
     <ul class="navbar">
-        {% if logged == True %}
+        {% if user.is_authenticated %}
             {% block logged %}
-                <li id="dashboard"><a href="/dashboard/">Dashboard</a></li>
-                <li id="calendar"><a href="/calendar/">Calendar</a></li>
-                <li id="profile"><a href="/profile/">Profile</a></li>
-                <li id="logout" class="right"><a href="/logout/">Logout</a></li>
+                <li id="dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li id="calendar"><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li id="profile"><a href="{% url 'profile' %}">Profile</a></li>
+                <li id="logout" class="right"><a href="{% url 'logout' %}">Logout</a></li>
             {% endblock %}
         {% else %}
             {% block not_logged %}
-                <li id="login"><a href="/login/">Login</a></li>
+                <li id="login"><a href="{% url 'login' %}">Login</a></li>
             {% endblock %}
         {% endif %}
         <li class="right"><a href="/admin/">Admin</a></li>

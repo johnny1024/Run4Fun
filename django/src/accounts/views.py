@@ -1,37 +1,18 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
 
 
-# Create your views here.
-# def index(request):
-#     request.session.set_test_cookie()
-#     # context = {'page': request.path.replace('/', ''),
-#     #            'logged': request.session.test_cookie_worked()}
-#     return HttpResponseRedirect('/dashboard')
-
-def index(request):
-    print("test")
-
-    return render_to_response('login.html')
-
-
-def auth_and_redirect(request):
-    context = {'page': request.path.replace('/', ''),
-               'logged': request.session.test_cookie_worked()}
-    if request.session.test_cookie_worked:
-        return render_to_response('dashboard_main.html', context)
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('dashboard')
     else:
-        return render_to_response('login_main.html', context)
-
-
-def register(request):
-    print("test")
-
-    return HttpResponseRedirect('/dashboard')
-
-
-def logout(request):
-    request.session.delete_test_cookie()
-    context = {'page': request.path.replace('/', ''),
-               'logged': request.session.test_cookie_worked()}
-    return render_to_response('dashboard_main.html', context)
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})

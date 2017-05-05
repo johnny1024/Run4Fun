@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'workout_calendar',
     'dashboard',
-    'login',
+    'home',
     'profile_settings',
     'accounts',
 ]

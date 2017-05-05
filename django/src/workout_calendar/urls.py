@@ -9,5 +9,5 @@ urlpatterns = [
     # the more detailed one should be the first argument!
     url(r'^([0-9]{4})/([0-9]{2})/$', views.calendar),
     url(r'', views.calendar, {'year': str(datetime.datetime.now().year), 'month': str(datetime.datetime.now().month)},
-        name='index'),
+        name='calendar'),
 ]
