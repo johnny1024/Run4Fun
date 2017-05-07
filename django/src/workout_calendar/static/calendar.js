@@ -65,6 +65,8 @@ function sendFormRequest(type){
         type: "POST",
         data: $('#workoutForm').serialize(),
         success : function () {
+            console.log("sendFormRequest");
+            window.location.reload();
             response_args = arguments[0];
         }
     });

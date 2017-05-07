@@ -84,7 +84,7 @@ class WorkoutCalendar(HTMLCalendar):
         return '<td class="%s">%s</td>' % (cssclass, body)
 
     def create_day_with_workouts(self, workout):
-        body = '<div class=workout_info><ul>'
+        body = '<div class=workout_info id=' + str(workout.id) + '><ul>'
         body += '<li>User: ' + workout.user.name
         body += "</li><li>"
         body += 'Workout: ' + esc(workout.comment)
