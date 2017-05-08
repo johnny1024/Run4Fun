@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '_=r%y1sov9bf%th&sk9(w8d#4$llg0#q-tx^(f+-27sa(0u%+_'
 DEBUG = True
 
 ALLOWED_HOSTS = ['run4fun.ddns.net', 'localhost', '0.0.0.0']
-
 
 # Application definition
 
@@ -39,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'workout_calendar',
     'dashboard',
-    'login',
-    'profile_settings',
+    'home',
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -59,7 +57,7 @@ ROOT_URLCONF = 'run4fun.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(os.path.dirname(os.path.realpath(__file__)),"../common/templates") ],
+        'DIRS': [os.path.join(os.path.dirname(os.path.realpath(__file__)), "../common/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,7 +71,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'run4fun.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -119,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -133,18 +129,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 '''
-Your project will probably also have static assets that aren't tied to a particular app. 
+Your project will probably also have static assets that aren't tied to a particular app.
 In addition to using a static/ dir inside your apps, you can define a list of directories
 (STATICFILES_DIRS) in your settings file where Django will also look for static files.
 '''
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "../common/static"),
-    '../src/common/static/',
+    os.path.join(BASE_DIR, "common/static"),
 )
 
+LOGIN_REDIRECT_URL = '/'

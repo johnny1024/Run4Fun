@@ -1,38 +1,27 @@
+from django.contrib.auth.models import User
 from django.db import models
-
-
-# Create your models here.
-class Runner(models.Model):
-    """
-    Class that represents single user in application.
-    It contains basic information about user.
-
-    `name`: User's chosen name.
-    `age`: User's age.
-    `sex`: User's sex.
-    """
-    SEX_CHOICE = (
-        ('F', 'Female'),
-        ('M', 'Male'),
-    )
-
-    name = models.CharField(max_length=30)
-    age = models.IntegerField()
-    sex = models.CharField(max_length=1, choices=SEX_CHOICE)
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
 
 
 class Workout(models.Model):
     """
-    Class that represents single training.
-    When User wants to add training to calendar, Workout object is created.
+    Represents a single training.
+    When User wants to add a training to the calendar, the Workout object is created.
     It contains important information about training.
 
-    `date`: date of training.
     `user`: User's name.
+    `date`: date of training.
     `title`: short description of planned training.
     """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(null=True)
+    title = models.CharField(max_length=30, null=True)
     distance = models.IntegerField(null=True)
     comment = models.TextField(blank=True)
-    user = models.ForeignKey(Runner, on_delete=models.CASCADE, null=True)
     done = models.BooleanField(default=False)
+
+# @receiver(post_save, sender=User)
+# def save_user_workout(sender, instance, **kwargs):
+#     if instance.workout:
+#         instance.workout.save()

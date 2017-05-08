@@ -1,5 +1,7 @@
-from django.conf.urls import url
 import datetime
+
+from django.conf.urls import url
+
 from . import views
 
 urlpatterns = [
@@ -10,6 +12,6 @@ urlpatterns = [
     url(r'^delete_workout/$', views.delete_workout, name='delete_workout'),
     url(r'^update_workout/$', views.update_workout, name='update_workout'),
     url(r'^([0-9]{4})/([0-9]{2})/$', views.calendar),
-    url(r'', views.calendar, {'year': str(datetime.datetime.now().year), 'month': str(datetime.datetime.now().month)}, name='index'),
-
+    url(r'', views.calendar, {'year': str(datetime.datetime.now().year), 'month': str(datetime.datetime.now().month)},
+        name='calendar'),
 ]

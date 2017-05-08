@@ -1,0 +1,47 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+    {% block head %}
+    {% endblock %}
+    <title>{% block title %}Run4Fun{% endblock %}</title>
+</head>
+<body>
+    <div>
+        <ul class="navbar">
+            {% if user.is_authenticated %}
+                <li id="dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li id="calendar"><a href="{% url 'calendar' %}">Calendar</a></li>
+                <li id="profile"><a href="{% url 'profile' %}">Profile</a></li>
+                <li id="logout" class="right"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li id="signup"><a href="{% url 'signup' %}">Signup</a></li>
+                <li id="login"><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            <li class="right"><a href="/admin/">Admin</a></li>
+        </ul>
+    </div>
+
+    <div>
+        {% if user.is_authenticated %}
+        Witaj {{ user }}!
+        {% endif %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <script type="text/javascript">
+        document.querySelector("#{{page}}").firstElementChild.classList.add('active');
+    </script>
+
+    {% block scipt %}
+    {% endblock %}
+</body>
+</html>
+
+
+

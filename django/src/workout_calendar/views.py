@@ -1,12 +1,15 @@
-from .models import Workout, Runner
-from .calendar_functions import WorkoutCalendar
-from django.utils.safestring import mark_safe
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response
+from django.utils.safestring import mark_safe
+from .calendar_functions import WorkoutCalendar
+from .models import Workout
 from django.http import HttpResponse, HttpResponseRedirect
 import json
 from django.shortcuts import render
 
 
+@login_required
 def calendar(request, year, month):
     now = datetime.datetime.now()
     if len(month) == 0:
@@ -19,7 +22,10 @@ def calendar(request, year, month):
         date__year=year, date__month=month
     )
     cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
-    return render(request, 'calendar_template.html', {'calendar': mark_safe(cal), })
+    context = {'page': request.resolver_match.url_name,
+               'user': request.user,
+               'calendar': mark_safe(cal)}
+    return render('calendar_template.html', context)
 
 
 def display_form(request):
@@ -52,7 +58,7 @@ def add_workout(request):
         print("Add workout! Data got from the form: " )
         params = request.POST
         date = datetime.datetime.strptime(request.POST.get('date'), "%Y-%m-%d").date()
-        user = Runner.objects.filter(name=params.get('runner'))[:1].get()
+        user = request.user
         print(date)
         new_workout = Workout(date=date, distance=int(params.get('distance')), comment=params.get('comment'),
                               user=user, done=False)
