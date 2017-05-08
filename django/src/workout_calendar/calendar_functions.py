@@ -1,7 +1,6 @@
 from calendar import HTMLCalendar
 from datetime import date
 from itertools import groupby
-
 from django.utils.html import conditional_escape as esc
 
 
@@ -33,8 +32,7 @@ class WorkoutCalendar(HTMLCalendar):
         """
 
         if day != 0:
-            cssid = str(self.year) + "-" + self.format_one_digit(self.month) + "-" + \
-                    self.format_one_digit(day)
+            cssid = str(self.year) + "-" + self.format_one_digit(self.month) + "-" + self.format_one_digit(day)
             cssclass = self.cssclasses[weekday]
             cssclass += ' day'
             if date.today() == date(self.year, self.month, day):
@@ -85,7 +83,7 @@ class WorkoutCalendar(HTMLCalendar):
 
     def create_day_with_workouts(self, workout):
         body = '<div class=workout_info id=' + str(workout.id) + '><ul>'
-        body += '<li>User: ' + workout.user.name
+        body += '<li>User: ' + workout.user.username
         body += "</li><li>"
         body += 'Workout: ' + esc(workout.comment)
         body += '</li></ul></div>'

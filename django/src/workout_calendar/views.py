@@ -1,10 +1,9 @@
 import datetime
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
 from django.utils.safestring import mark_safe
 from .calendar_functions import WorkoutCalendar
 from .models import Workout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 import json
 from django.shortcuts import render
 
@@ -19,13 +18,13 @@ def calendar(request, year, month):
     month = int(month)
     year = int(year)
     my_workouts = Workout.objects.order_by('id').filter(
-        date__year=year, date__month=month
+        date__year=year, date__month=month, user=request.user
     )
     cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
     context = {'page': request.resolver_match.url_name,
                'user': request.user,
                'calendar': mark_safe(cal)}
-    return render('calendar_template.html', context)
+    return render(request, 'calendar.html', context)
 
 
 def display_form(request):
@@ -42,10 +41,10 @@ def display_form(request):
             print(e.id)
             to_send = {'date': str(e.date),
                        'distance': e.distance,
-                       'runner': e.user.name,
+                       'runner': e.user.username,
                        'comment': e.comment,
                        'done': e.done,
-                       'id' : e.id
+                       'id': e.id
                        }
         return HttpResponse(json.dumps(to_send))
 
@@ -55,7 +54,7 @@ def display_form(request):
 
 def add_workout(request):
     if request.POST:
-        print("Add workout! Data got from the form: " )
+        print("Add workout! Data got from the form: ")
         params = request.POST
         date = datetime.datetime.strptime(request.POST.get('date'), "%Y-%m-%d").date()
         user = request.user
@@ -68,15 +67,13 @@ def add_workout(request):
 
 def update_workout(request):
     if request.POST:
-        print("Update workout! Data got from the form: " )
+        print("Update workout! Data got from the form: ")
         print(request.body)
-        print(request.POST.get('runner'))
     return HttpResponse()
 
 
 def delete_workout(request):
     if request.POST:
-        print("Delete workout! Data got from the form: " )
+        print("Delete workout! Data got from the form: ")
         print(request.body)
-        print(request.POST.get('runner'))
     return HttpResponse()
