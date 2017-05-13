@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Profile{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
+{% endblock %}
 
 {% block content %}
     <h2>{{ user.get_full_name }}</h2>
@@ -9,8 +14,13 @@
         <li>Age: {{ user.profile.age }}</li>
         <li>Sex: {{ user.profile.sex }}</li>
         <li>Weight: {{ user.profile.weight }}</li>
+        {% if user.profile.avatar == None %}
+            <img src="" />
+        {% else %}
+            <img src="{{ default_avatar }}"/>
+        {% endif %}
     </div>
-    
+
     <form method="post">
         {% csrf_token %}
         {{ user.as_p }}

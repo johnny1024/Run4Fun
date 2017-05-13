@@ -20,6 +20,7 @@ dependencies {
     python 'pypi:Markdown:2.6.8'
     python 'pypi:mock:2.0.0'
     python 'pypi:psycopg2:2.7.1'
+    python 'pypi:Pillow:4.1.1'
 }
 
 repositories {

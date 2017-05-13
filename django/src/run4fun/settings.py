@@ -143,3 +143,5 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+
+DEFAULT_AVATAR_DIR = os.path.join("", "common/static/images/default_user.jpg")

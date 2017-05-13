@@ -12,6 +12,7 @@ class Profile(models.Model):
     `age`: User's age.
     `sex`: User's sex.
     `weight`: User's weight
+    'avatar': User's image
     """
 
     SEX_CHOICE = (
@@ -23,6 +24,7 @@ class Profile(models.Model):
     age = models.IntegerField(null=True)
     sex = models.CharField(max_length=1, choices=SEX_CHOICE, null=True)
     weight = models.FloatField(null=True)
+    avatar = models.ImageField()
 
 
 @receiver(post_save, sender=User)
