@@ -4,28 +4,26 @@
 {% block title %}Profile{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
 {% endblock %}
 
 {% block content %}
-    <h2>{{ user.get_full_name }}</h2>
-    <div>
-        <li>Username: {{ user.username }}</li>
-        <li>Age: {{ user.profile.age }}</li>
-        <li>Sex: {{ user.profile.sex }}</li>
-        <li>Weight: {{ user.profile.weight }}</li>
+
+    <div id="profile_div">
+        <h2>Your profile</h2>
+        <p>Username: {{ user.username }}</p>
         {% if user.profile.avatar == None %}
             <img src="" />
         {% else %}
             <img src="{{ default_avatar }}"/>
         {% endif %}
-    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ user.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Save changes</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {{ user.as_p }}
+            {{ profile_form.as_p }}
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
 
 {% endblock %}

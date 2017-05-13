@@ -30,21 +30,17 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
         user_form = request.user
-        # user_form = UserCreationForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if profile_form.is_valid() and user_form.is_valid():
+        if profile_form.is_valid():
             print("forms are ""valid")
             user_form.save()
             profile_form.save()
             print("profile saved?")
-            # messages.success(request, _('Your profile was successfully updated!'))
             return redirect('profile')
         else:
             print("forms are not valid")
-            # messages.error(request, _('Please correct the error below.'))
     else:
         user_form = request.user
-        # user_form = UserCreationForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profile.html', {
         'user': user_form,

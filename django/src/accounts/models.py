@@ -22,7 +22,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.IntegerField(null=True)
-    sex = models.CharField(max_length=1, choices=SEX_CHOICE, null=True)
+    sex = models.CharField(max_length=1, choices=SEX_CHOICE, null=False, default=SEX_CHOICE[1][0])
     weight = models.FloatField(null=True)
     avatar = models.ImageField()
 
