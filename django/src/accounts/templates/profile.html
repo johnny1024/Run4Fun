@@ -3,5 +3,19 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<div>You are at profile index!</div>
+    <h2>{{ user.get_full_name }}</h2>
+    <div>
+        <li>Username: {{ user.username }}</li>
+        <li>Age: {{ user.profile.age }}</li>
+        <li>Sex: {{ user.profile.sex }}</li>
+        <li>Weight: {{ user.profile.weight }}</li>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ user.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Save changes</button>
+    </form>
+
 {% endblock %}
