@@ -5,9 +5,8 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse
-from django.conf import settings
-
 from accounts.form import ProfileForm
+from run4fun.settings import AVATARS_DIR, DEFAULT_AVATAR_DIR
 
 
 def signup(request):
@@ -30,9 +29,14 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
         user_form = request.user
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if profile_form.is_valid():
             print("forms are ""valid")
+
+            # TODO not working
+            avatar = profile_form.cleaned_data['avatar']
+            profile_form.avatar = avatar
+
             user_form.save()
             profile_form.save()
             print("profile saved?")
@@ -46,7 +50,8 @@ def profile(request):
         'user': user_form,
         'profile_form': profile_form,
         'page': request.resolver_match.url_name,
-        'default_avatar': settings.DEFAULT_AVATAR_DIR
+        'default_avatar_dir': DEFAULT_AVATAR_DIR,
+        'avatars_dir': AVATARS_DIR
     })
 
 

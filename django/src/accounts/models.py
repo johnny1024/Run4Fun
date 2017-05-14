@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from run4fun.settings import AVATARS_DIR
 
 
 class Profile(models.Model):
@@ -21,10 +22,10 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    age = models.IntegerField(null=True)
+    age = models.IntegerField(null=True, blank=True)
     sex = models.CharField(max_length=1, choices=SEX_CHOICE, null=False, default=SEX_CHOICE[1][0])
-    weight = models.FloatField(null=True)
-    avatar = models.ImageField()
+    weight = models.FloatField(null=True, blank=True)
+    avatar = models.ImageField(null=True, upload_to=AVATARS_DIR)
 
 
 @receiver(post_save, sender=User)

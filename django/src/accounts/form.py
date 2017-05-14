@@ -2,6 +2,8 @@ from django import forms
 from accounts.models import Profile
 from django.core.files.images import get_image_dimensions
 
+from run4fun.settings import MAX_AVATAR_WIDTH
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -15,7 +17,7 @@ class ProfileForm(forms.ModelForm):
             w, h = get_image_dimensions(avatar)
 
             #validate dimensions
-            max_width = max_height = 100
+            max_width = max_height = MAX_AVATAR_WIDTH
             if w > max_width or h > max_height:
                 raise forms.ValidationError(
                     u'Please use an image that is '

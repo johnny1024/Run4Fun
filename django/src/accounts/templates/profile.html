@@ -11,14 +11,18 @@
 
     <div id="profile_div">
         <h2>Your profile</h2>
+
         <p>Username: {{ user.username }}</p>
         {% if user.profile.avatar == None %}
-            <img src="" />
+            {{ default_avatar_dir }}
+            <img src="{{ default_avatar_dir }}" />
         {% else %}
-            <img src="{{ default_avatar }}"/>
+            {{ user.profile.avatar }}
+            {{ user.get_profile.avatar }}
+            <img src="{{ user.profile.avatar }}"/>
         {% endif %}
 
-        <form method="post">
+        <form method="post" enctype=multipart/form-data>
             {% csrf_token %}
             {{ user.as_p }}
             {{ profile_form.as_p }}

@@ -144,4 +144,8 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = '/'
 
-DEFAULT_AVATAR_DIR = os.path.join("", "common/static/images/default_user.jpg")
+AVATARS_DIR = os.path.join("", "src/common/static/images/")
+
+DEFAULT_AVATAR_DIR = os.path.join(AVATARS_DIR, "default_user.jpg")
+
+MAX_AVATAR_WIDTH = 500
