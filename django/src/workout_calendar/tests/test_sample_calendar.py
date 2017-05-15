@@ -6,7 +6,7 @@ from workout_calendar import calendar_functions
 from django.contrib.auth.models import User
 
 
-class DisplayFormTestCase(TestCase):
+class TestDisplayForm(TestCase):
     def test_get_method_with_date(self):
         rf = RequestFactory()
         get_request = rf.get(path='/calendar/display_form', data ={'date': '2017-09-08'})
@@ -21,7 +21,7 @@ class DisplayFormTestCase(TestCase):
         response = views.display_form(get_request)
         self.assertEqual(response.status_code, 404)
 
-class CalendarTestCase(TestCase):
+class TestCalendar(TestCase):
     def test_calendar_get_method(self):
         rf = RequestFactory()
         get_request = rf.get(path='/calendar/')
@@ -31,7 +31,7 @@ class CalendarTestCase(TestCase):
         response = views.calendar(get_request, '2017', '07')
         self.assertEqual(response.status_code, 200)
 
-class CalendarFunctionsTestCase(TestCase):
+class TestFunctions(TestCase):
     def setUp(self):
         self.calendar = calendar_functions.WorkoutCalendar([])
 
