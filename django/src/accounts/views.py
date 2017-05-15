@@ -1,12 +1,16 @@
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 from accounts.form import ProfileForm
+
+
+def profile_data_check(user):
+    return user.profile.age is not None
 
 
 def signup(request):
@@ -18,10 +22,20 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('dashboard')
+            return redirect('profile')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+
+"""
+View for displaying user's profile. 
+
+`request`: request for this view.
+
+On this view user can add and edit his account information.
+This view requires being logged.
+"""
 
 
 @login_required
@@ -31,10 +45,7 @@ def profile(request):
         user_form = request.user
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if profile_form.is_valid():
-            print("forms are ""valid")
-            user_form.save()
             profile_form.save()
-            print("profile saved?")
             return redirect('profile')
         else:
             print("forms are not valid")

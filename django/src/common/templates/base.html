@@ -25,9 +25,9 @@
         </ul>
     </div>
 
-    <div>
-        {% if user.is_authenticated %}
-        Witaj {{ user }}!
+    <div id="profile_alert">
+        {% if user.is_authenticated and user.profile.age == None %}
+        Please fill your profile information before accessing the site.
         {% endif %}
     </div>
 

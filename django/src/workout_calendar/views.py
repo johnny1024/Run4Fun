@@ -1,6 +1,9 @@
 import datetime
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.urls import reverse
 from django.utils.safestring import mark_safe
+
+from accounts.views import profile_data_check
 from .calendar_functions import WorkoutCalendar
 from .models import Workout
 from django.http import HttpResponse
@@ -9,6 +12,7 @@ from django.shortcuts import render
 
 
 @login_required
+@user_passes_test(profile_data_check, '/profile/')
 def calendar(request, year, month):
     now = datetime.datetime.now()
     if len(month) == 0:
