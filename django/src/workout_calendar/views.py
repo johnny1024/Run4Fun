@@ -11,6 +11,16 @@ from django.shortcuts import render, redirect
 
 @login_required
 def calendar(request, year, month):
+    """
+    If the request is a POST request, validates the form and creates, updates or deletes a chosen workout.
+
+    Otherwise, displays the main calendar.
+    `param`: request: GET or POST request made by a logged user.
+    `param year`: String representing a year we want to display.
+    `param month`: String representing a month we want to display
+
+    Method returns HttpResponse redirecting to calendar.html
+    """
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
         print(form)
@@ -53,7 +63,11 @@ def calendar(request, year, month):
 
 
 def display_form(request):
-    print("Display form!")
+    """
+    Gets all of the user workouts at a chosen date and passes the result to the javascript function.
+
+    `param:` request: GET request with a date.
+    """
     date_str = request.GET.get('date')
     print(date_str)
     if date_str:
