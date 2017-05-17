@@ -36,7 +36,7 @@ class TestRedirect(TestCase):
         get_request = rf.get(path='/calendar/')
         user = User.objects.create_user(username='testUser', password='testingPassword')
         get_request.user = user
-        resolver_match_mock = Mock(url_name='calendar/')
+        resolver_match_mock = Mock(url_name='calendar')
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request)
         response.client = Client()
@@ -49,7 +49,7 @@ class TestRedirect(TestCase):
         user.profile.age = 12
         user.profile.weight = 40
         get_request.user = user
-        resolver_match_mock = Mock(url_name='calendar/')
+        resolver_match_mock = Mock(url_name='calendar')
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request, year='2017', month='11')
         response.client = Client()
@@ -60,7 +60,7 @@ class TestRedirect(TestCase):
         get_request = rf.get(path='/dashboard/')
         user = User.objects.create_user(username='testUser', password='testingPassword')
         get_request.user = user
-        resolver_match_mock = Mock(url_name='dashboard/')
+        resolver_match_mock = Mock(url_name='dashboard')
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request)
         response.client = Client()
@@ -73,7 +73,7 @@ class TestRedirect(TestCase):
         user.profile.age = 12
         user.profile.weight = 40
         get_request.user = user
-        resolver_match_mock = Mock(url_name='dashboard/')
+        resolver_match_mock = Mock(url_name='dashboard')
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request, year='2017', month='11')
         response.client = Client()
