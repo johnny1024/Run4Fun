@@ -5,6 +5,7 @@ from workout_calendar import views
 from workout_calendar import calendar_functions
 from workout_calendar.models import Workout
 import mock
+from mock import patch
 
 
 class TestDisplayForm(SimpleTestCase):
@@ -50,10 +51,12 @@ class TestCalendar(SimpleTestCase):
         post_request = rf.post(path='/calendar/')
         post_request.user = self.user
         post_request.data = 'delete'
+        # Mocking delete function
         with mock.patch.object(Workout, 'delete') as delete_mock:
             delete_mock.return_value = True
             response = views.calendar(post_request, '2017', '08')
             response.client = Client()
+            # Check if the user has been redirected
             self.assertRedirects(response, expected_url='/calendar/', target_status_code=302)
 
     def test_calendar_post_update_method(self):
@@ -68,7 +71,7 @@ class TestCalendar(SimpleTestCase):
             self.assertRedirects(response, expected_url='/calendar/', target_status_code=302)
 
 
-class TestFunctions(SimpleTestCase):
+class TestCalendarFunctions(SimpleTestCase):
     def setUp(self):
         self.calendar = calendar_functions.WorkoutCalendar([])
 
@@ -88,3 +91,9 @@ class TestFunctions(SimpleTestCase):
         self.calendar.formatmonth(2015, 5)
         self.assertEqual(self.calendar.month, 5)
         self.assertEqual(self.calendar.year, 2015)
+
+    @patch('workout_calendar.calendar_functions.WorkoutCalendar.day_cell_no_id')
+    def test_format_day_no_day(self, mock):
+        # Checking if another function has been called
+        self.calendar.formatday(0, 0)
+        self.assertTrue(mock.called)
