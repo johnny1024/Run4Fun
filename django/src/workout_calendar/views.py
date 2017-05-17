@@ -1,6 +1,7 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.safestring import mark_safe
 from workout_calendar.form import WorkoutForm
+from accounts.views import profile_data_check
 from .calendar_functions import WorkoutCalendar
 from .models import Workout
 from django.http import HttpResponse
@@ -10,6 +11,7 @@ import datetime
 
 
 @login_required
+@user_passes_test(profile_data_check, '/profile/')
 def calendar(request, year, month):
     """
     Given a year and a month, executes database queries, gets Workout list and allows the user to
