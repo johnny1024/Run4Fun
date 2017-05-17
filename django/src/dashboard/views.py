@@ -1,10 +1,6 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render_to_response
 
-
-# Create your views here.
-from django.urls import reverse
-
 from accounts.views import profile_data_check
 
 

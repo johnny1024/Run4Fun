@@ -1,10 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 
 from accounts.form import ProfileForm
 
@@ -28,19 +28,17 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-"""
-View for displaying user's profile. 
-
-`request`: request for this view.
-
-On this view user can add and edit his account information.
-This view requires being logged.
-"""
-
-
 @login_required
 @transaction.atomic
 def profile(request):
+    """
+    View for displaying user's profile.
+
+    `request`: request for this view.
+
+    On this view user can add and edit his account information.
+    This view requires being logged.
+    """
     if request.method == 'POST':
         user_form = request.user
         profile_form = ProfileForm(request.POST, instance=request.user.profile)

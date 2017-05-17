@@ -1,6 +1,5 @@
 import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from accounts.views import profile_data_check
