@@ -1,6 +1,17 @@
 @import "../../common/static/master";
 @import "../../common/static/common";
 
-div {
+.dashboardItem {
   font-size: 20px;
+  font-family: $basic-font-family;
+  margin: 10px;
+  border: 1px solid $blue-green;
+  border-radius: 4px;
+  background-color: $background-beige;
+  width: 50%;
+  position: relative;
+  padding: 12px 20px;
+  display: block;
+  //text-align: center;
+  box-sizing: border-box;
 }

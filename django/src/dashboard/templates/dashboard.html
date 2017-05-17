@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block head %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}"/>
 {% endblock %}
 
 
 {% block content %}
-    <div>{{user.get_full_name}}</div>
-    <div>You are with us for {{days}} day(s)!</div>
-    <div>In this time you have run {{distanceWhole}} kilometers!</div>
-    <div>During this week you have already run {{distanceWeekDone}} of {{distanceWeekPlanned}} planned kilometers.</div>
+    <div class="dashboardItem">Hello {{user.username}}!</div>
+    <div class="dashboardItem">You are with us {{days}} day(s)!</div>
+    <div class="dashboardItem">In this time you have run {{distanceWhole}} kilometers!</div>
+    <div class="dashboardItem">During this week you have already run {{distanceWeekDone}} of {{distanceWeekPlanned}} planned kilometers.</div>
 {% endblock %}

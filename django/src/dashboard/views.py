@@ -20,10 +20,24 @@ def index(request):
 
 
 def days_since_join(user):
+    """
+    Method calculates days since creation of user account.
+
+    `user`: currently logged user
+
+    Method returns number of days since creation of user account.
+    """
     return (timezone.now() - user.date_joined).days
 
 
 def whole_ran_distance(user):
+    """
+    Method calculates distance ran by user (all completed trainings in database).
+
+    `user`: currently logged user
+
+    Method returns global completed distance.
+    """
     distance = 0
     workouts = Workout.objects.filter(user=user, done=True)
     for w in workouts:
@@ -32,9 +46,16 @@ def whole_ran_distance(user):
 
 
 def weekly_run(user):
+    """
+    Method calculates planned trainings in current week (from monday to sunday), and checks level of completion.
+
+    `user`: currently logged user
+
+    Method returns planned and completed distance in current week.
+    """
     number_of_today = timezone.now().weekday()
     start = timezone.now() - timedelta(days=number_of_today)
-    end = timezone.now() + timedelta(days=6-number_of_today)
+    end = timezone.now() + timedelta(days=6 - number_of_today)
     workouts = Workout.objects.filter(user=user)
     planned = 0
     done = 0
