@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class TestDisplayForm(TestCase):
     def test_get_method_with_date(self):
         rf = RequestFactory()
-        get_request = rf.get(path='/calendar/display_form', data ={'date': '2017-09-08'})
+        get_request = rf.get(path='/calendar/display_form', data={'date': '2017-09-08'})
         get_request.user = User.objects.create_user(username='testUser')
         response = views.display_form(get_request)
         self.assertEqual(response.status_code, 200)
@@ -21,6 +21,7 @@ class TestDisplayForm(TestCase):
         response = views.display_form(get_request)
         self.assertEqual(response.status_code, 404)
 
+
 class TestCalendar(TestCase):
     def test_calendar_get_method(self):
         rf = RequestFactory()
@@ -30,6 +31,7 @@ class TestCalendar(TestCase):
         get_request.resolver_match.url_name = 'calendar'
         response = views.calendar(get_request, '2017', '07')
         self.assertEqual(response.status_code, 200)
+
 
 class TestFunctions(TestCase):
     def setUp(self):
@@ -51,4 +53,3 @@ class TestFunctions(TestCase):
         self.calendar.formatmonth(2015, 5)
         self.assertEqual(self.calendar.month, 5)
         self.assertEqual(self.calendar.year, 2015)
-
