@@ -1,5 +1,3 @@
-import org.kravemir.gradle.sass.SassCompileTask
-
 buildscript {
     repositories {
         maven {
@@ -35,6 +33,7 @@ repositories {
         }
     }
 }
+
 
 python {
     srcDir = project.file('src').path // The location of this project's source directory.
@@ -111,9 +110,8 @@ def matchingDirectories = [:]
 def srcDirName = '/' + file(python.srcDir).name + '/'
 file("${python.srcDir}").eachDirRecurse {
     def moduleName = ''
-    if (it.path.indexOf(srcDirName) + srcDirName.length() < it.path.lastIndexOf('/')) {
+    if (it.path.indexOf(srcDirName) + srcDirName.length() < it.path.lastIndexOf('/'))
         moduleName = it.path.substring(it.path.indexOf(srcDirName) + srcDirName.length(), it.path.lastIndexOf('/'))
-    }
     def actualPath = it.path
     def found = false
     it.eachFile {
@@ -135,5 +133,5 @@ matchingDirectories.each { module ->
     }
 }
 
-task compileAllSass(dependsOn: tasks.withType(SassCompileTask))
-assemble.dependsOn compileAllSass
+task compileAllScss(dependsOn: tasks.matching {Task cssTask -> cssTask.name.endsWith("Sass")})
+assemble.dependsOn compileAllScss
