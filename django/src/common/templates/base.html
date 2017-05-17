@@ -25,9 +25,9 @@
         </ul>
     </div>
 
-    <div id="profile_alert">
+    <div>
         {% if user.is_authenticated and user.profile.age == None %}
-        Please fill your profile information before accessing the site.
+            <div id="profile_alert">Please fill your profile information before accessing the site.</div>
         {% endif %}
     </div>
 
