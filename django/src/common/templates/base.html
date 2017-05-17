@@ -24,13 +24,11 @@
             <li class="right"><a href="/admin/">Admin</a></li>
         </ul>
     </div>
-
     <div>
-        {% if user.is_authenticated %}
-        Witaj {{ user }}!
+        {% if user.is_authenticated and user.profile.age == None %}
+            <div id="profile_alert">Please fill your profile information before accessing the site.</div>
         {% endif %}
     </div>
-
     {% block content %}
     {% endblock %}
 
