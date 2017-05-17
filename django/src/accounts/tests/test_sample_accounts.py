@@ -40,7 +40,7 @@ class TestRedirect(TestCase):
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request)
         response.client = Client()
-        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/profile/?next=/calendar/', target_status_code=302)
 
     def test_data_entered_trying_to_go_to_calendar(self):
         rf = RequestFactory()
@@ -64,7 +64,7 @@ class TestRedirect(TestCase):
         get_request.resolver_match = resolver_match_mock
         response = wc_views.calendar(get_request)
         response.client = Client()
-        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/profile/?next=/dashboard/', target_status_code=302)
 
     def test_data_entered_trying_to_go_to_dashboard(self):
         rf = RequestFactory()
