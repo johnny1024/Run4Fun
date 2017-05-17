@@ -14,6 +14,13 @@ def profile_data_check(user):
 
 
 def signup(request):
+    """
+    View for displaying a signup form. Redirects to Profile page after successful registration
+
+    `request`: request o extract post information from
+
+    In case of POST request this view performs user creation in the database, otherwise displays a registration form.
+    """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
