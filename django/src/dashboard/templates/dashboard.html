@@ -2,6 +2,14 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% block head %}
+
+{% endblock %}
+
+
 {% block content %}
-    <div>You are at dashboard index!</div>
+    <div>{{user.get_full_name}}</div>
+    <div>You are with us for {{days}} day(s)!</div>
+    <div>In this time you have run {{distanceWhole}} kilometers!</div>
+    <div>During this week you have already run {{distanceWeekDone}} of {{distanceWeekPlanned}} planned kilometers.</div>
 {% endblock %}
