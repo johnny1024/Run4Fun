@@ -4,7 +4,7 @@
 {% block title %}Calendar{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'calendar.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'calendar.css' %}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="{% static 'calendar.js' %}"></script>
@@ -13,41 +13,30 @@
 {% endblock %}
 
 
-
 {% block content %}
+<div id="wrapper">
+    <div id="calendar-container">
+        {{ calendar }}
+    </div>
 
-{{ calendar }}
+    <div id="form-container">
+        <div id="form-header"> Workouts </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <input type="submit" name="update" id="updateBt" value="update"/>
+            </div>
+            <div>
+                <input type="submit" name="create" id="addBt" value="create"/>
+            </div>
+            <div>
+                <input type="submit" name="delete" id="deleteBt" value="delete"/>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="post" enctype="multipart/form-data" id="workoutForm">
-        {% csrf_token %}
-        <fieldset>
-            <div class="form-group">
-                <label>Runner's Name</label>
-                    <input type="text" name="runner"/>
-            </div>
-            <div>
-                <label>Date</label>
-                    <input type="date" name="date" data-date="" data-date-format="DD MMMM YYYY"
-                           class="form-control" readonly/>
-            </div>
-            <div>
-                <label>Distance</label>
-                    <input type="number" name="distance"/>
-            </div>
-            <div>
-                <label>Comment</label>
-                    <textarea name="comment" rows="4" cols="30" form="workoutForm"></textarea>
-            </div>
-                <div>
-                        <input type="submit" id="updateBt" value="update" onclick="sendFormRequest('update_workout')"/>
-                </div>
-                <div>
-                        <input type="submit" id="addBt" value="create" onclick="sendFormRequest('add_workout')"/>
-                </div>
-                <div>
-                        <input type="submit"  id="deleteBt" value="delete" onclick="sendFormRequest('delete_workout')"/>
-                </div>
-        </fieldset>
-    </form>
+
 
 {% endblock %}
