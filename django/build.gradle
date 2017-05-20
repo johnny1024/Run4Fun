@@ -21,6 +21,7 @@ dependencies {
     python 'pypi:mock:2.0.0'
     python 'pypi:psycopg2:2.7.1'
     python 'pypi:pytest-pythonpath:0.7.1'
+    python 'pypi:django-bootstrap3:8.2.3'
 }
 
 repositories {
