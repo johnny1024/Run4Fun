@@ -7,3 +7,4 @@ class WorkoutForm(forms.ModelForm):
     class Meta:
         model = Workout
         fields = ('id', 'date', 'title', 'distance', 'comment', 'done')
+    # date= forms.CharField(disabled=True)

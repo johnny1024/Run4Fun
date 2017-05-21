@@ -8,6 +8,8 @@ window.onload = function () {
     $('#updateBt').hide();
     $('#deleteBt').hide();
 
+    $('#id_date').attr('readonly','readonly');
+
     $("td").click(function (event) {
         var date = event.target.closest('td').id;
         if (date) {

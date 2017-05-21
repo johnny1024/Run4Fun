@@ -30,6 +30,7 @@ def calendar(request, year=None, month=None):
         if 'create' in request.POST:
             if form.is_valid():
                 obj = form.save(commit=False)
+                print(obj.date)
                 print(obj.id)
                 obj.user = request.user
                 obj.save()
@@ -97,12 +98,10 @@ def display_form(request):
 
 
 def get_first_workout(user, date):
-    print('Get first workout')
     return Workout.objects.filter(user=user, date=date)[0]
 
 
 def get_all_user_workouts(year, month, day, user):
-    print('Get all user workouts')
     return Workout.objects.filter(date__year=year, date__month=month,
                                   date__day=day, user=user)
 
