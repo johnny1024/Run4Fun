@@ -81,3 +81,23 @@ function sendFormRequest(type) {
         }
     });
 }
+
+function changeMonth(type) {
+    var request_url = '/calendar/change_month';
+    var date = $( ".day" ).first().attr('id');
+    $.ajax({
+        url: request_url,
+        type: "GET",
+        data: {
+            'date' : date,
+            'type' : type
+        },
+        success: function () {
+            response_args = JSON.parse(arguments[0]);
+            origin = window.location.origin;
+            $(location).attr('href', origin + '/calendar/' + response_args.year + '/' +
+            response_args.month);
+        }
+    })
+
+}
