@@ -1,7 +1,17 @@
 /**
  * Created by marta on 25.04.17.
  */
-
+$('document').ready(function(){
+    $('#id_calories').on('input', function() {
+    getWeight('calories');
+    });
+    $('#id_time').on('input', function() {
+    getWeight('time');
+    });
+    $('#id_distance').on('input', function() {
+    getWeight('distance');
+    });
+});
 
 window.onload = function () {
     $('#addBt').hide('fast');
@@ -9,7 +19,6 @@ window.onload = function () {
     $('#deleteBt').hide();
 
     $('#id_date').attr('readonly','readonly');
-
     $("td").click(function (event) {
         var date = event.target.closest('td').id;
         if (date) {
@@ -66,8 +75,9 @@ function getWorkoutByDate(date) {
                 console.log("Creating new");
                 $('textarea').val("");
                 $('input[name=runner]').val("");
-                $('input[name=distance]').val("");
-                $('input[name=title]').val("");
+                $('input[type=number]').val("");
+                // $('input[name=title]').val("");
+                // $
                 $('#id_done').prop("checked", false);
                 $('#addBt').show();
                 $('#updateBt').hide();
@@ -109,4 +119,36 @@ function changeMonth(type) {
         }
     })
 
+}
+
+function getWeight(type) {
+    console.log("getWeight");
+    var request_url = '/calendar/get_weight';
+    $.ajax({
+        url: request_url,
+        type: "GET",
+        success: function () {
+            response_args = JSON.parse(arguments[0]);
+            console.log(response_args.weight);
+            calculate(type, response_args.weight);
+        }
+    })
+}
+
+function calculate(type, weight) {
+    var calories = 0;
+    var distance = 0;
+    var time = 0;
+    var velocity = 9.0;
+    // Net Running calories Spent = (Body weight in pounds) x (0.63) x (Distance in miles)
+    if (type === 'distance') {
+        distance = $('#id_distance').val();
+        calories = weight * 0.63 * distance;
+        time = distance / velocity;
+    } else if (type === 'calories') {
+        calories = $('#id_calories').val();
+    } else {
+        time = $('#id_time').val();
+    }
+    console.log(time, calories, distance);
 }

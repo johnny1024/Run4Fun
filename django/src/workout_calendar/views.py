@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from workout_calendar.form import WorkoutForm
@@ -123,4 +124,11 @@ def change_month(request):
     to_send = {'month'  : changed_date.month,
                'year'   : changed_date.year
                }
+    return HttpResponse(json.dumps(to_send))
+
+def get_weight(request):
+    print('xd')
+    user = request.user
+    print(user.profile.weight)
+    to_send = { 'weight' : user.profile.weight}
     return HttpResponse(json.dumps(to_send))
