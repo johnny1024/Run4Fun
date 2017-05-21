@@ -25,6 +25,14 @@ window.onload = function () {
 };
 
 function getWorkoutByDate(date) {
+    var today = new Date();
+    var received_date = new Date(date);
+    if (today < received_date) {
+        // console.log("today is before clicked date!");
+         $('#id_done').attr("disabled", true);
+    } else {
+        $('#id_done').removeAttr("disabled");
+    }
     $.ajax({
         url: '/calendar/display_form',
         method: 'GET',
@@ -33,7 +41,6 @@ function getWorkoutByDate(date) {
         },
         success: function () {
             response_args = arguments[0];
-
             if (response_args.length > 2) {
                 // updating
                 console.log("Updating");
