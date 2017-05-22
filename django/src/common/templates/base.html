@@ -31,7 +31,9 @@
     </div>
     <div>
         {% if user.is_authenticated and user.profile.age == None %}
-        {% bootstrap_alert "Please fill your profile information before accessing the site." alert_type='danger' %}
+        <div class="alert alert-danger" role="alert">
+            Please fill your profile information before accessing the site.
+        </div>
         {% endif %}
     </div>
     {% block content %}
