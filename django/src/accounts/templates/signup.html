@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+<!--Load bootstrap-->
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block title %}Signup{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
+{% endblock %}
+
 {% block content %}
-<h2>Sign up</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-</form>
+
+<div id="profile_div">
+    <h2>Sign up</h2>
+
+    <form role="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+        {% buttons submit='Sign up' layout='inline' %}{% endbuttons %}
+
+    </form>
+</div>
+
 {% endblock %}
