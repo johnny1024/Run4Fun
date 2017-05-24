@@ -4,6 +4,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MinValueValidator
 
+my_default_errors = {
+    'required': 'This field is required',
+    'invalid': 'Enter a valid value'
+}
+
 
 class Profile(models.Model):
     """
@@ -21,9 +26,9 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    age = models.PositiveIntegerField(null=True)
+    age = models.PositiveIntegerField(null=True, error_messages=my_default_errors)
     sex = models.CharField(max_length=1, choices=SEX_CHOICE, null=False, default=SEX_CHOICE[1][0])
-    weight = models.FloatField(null=True, validators=[MinValueValidator(10.0)])
+    weight = models.FloatField(null=True, validators=[MinValueValidator(10.0)], error_messages=my_default_errors)
 
 
 @receiver(post_save, sender=User)

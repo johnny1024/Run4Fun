@@ -189,9 +189,11 @@ BOOTSTRAP3 = {
     'formset_renderers': {
         'default': 'bootstrap3.renderers.FormsetRenderer',
     },
+
     'form_renderers': {
         'default': 'bootstrap3.renderers.FormRenderer',
     },
+
     'field_renderers': {
         'default': 'bootstrap3.renderers.FieldRenderer',
         'inline': 'bootstrap3.renderers.InlineFieldRenderer',
@@ -201,3 +203,4 @@ BOOTSTRAP3 = {
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
