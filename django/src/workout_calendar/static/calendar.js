@@ -17,6 +17,7 @@ window.onload = function () {
     $('#addBt').hide('fast');
     $('#updateBt').hide();
     $('#deleteBt').hide();
+    $('#form-container').height($('#wrapper').height() - 6);
 
     $('#id_date').attr('readonly','readonly');
     $("td").click(function (event) {
