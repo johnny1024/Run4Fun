@@ -69,6 +69,8 @@ function getWorkoutByDate(date) {
                 $('input[name=runner]').val(response_args.runner);
                 $('input[name=title]').val(response_args.title);
                 $('input[name=distance]').val(response_args.distance);
+
+                getWeight('distance');
             }
             else {
                 // creating new
@@ -139,16 +141,25 @@ function calculate(type, weight) {
     var calories = 0;
     var distance = 0;
     var time = 0;
-    var velocity = 9.0;
-    // Net Running calories Spent = (Body weight in pounds) x (0.63) x (Distance in miles)
+    var velocity = 9; // 9 km per hour
     if (type === 'distance') {
-        distance = $('#id_distance').val();
-        calories = weight * 0.63 * distance;
-        time = distance / velocity;
+        distance = parseInt($('#id_distance').val()); // km
+        calories = weight * distance; // kilocalories
+        time = distance / velocity; // time in hours
     } else if (type === 'calories') {
-        calories = $('#id_calories').val();
+        calories = parseInt($('#id_calories').val());
+        distance = calories / weight;
+        time = distance / velocity;
     } else {
-        time = $('#id_time').val();
+        time = parseInt($('#id_time').val());
+        distance = time * velocity;
+        calories = weight * distance;
     }
+    calories = Math.round(calories);
+    distance = Math.round(distance);
+    time = (Math.round(time*60));
     console.log(time, calories, distance);
+    $('#id_calories').val(calories);
+    $('#id_distance').val(distance);
+    $('#id_time').val(time);
 }
