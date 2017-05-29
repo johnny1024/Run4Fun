@@ -1,18 +1,21 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from workout_calendar.form import WorkoutForm
 from accounts.views import profile_data_check
 from .calendar_functions import WorkoutCalendar
 from .models import Workout
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 import json
 import datetime
+from dateutil.relativedelta import relativedelta
 
 
 @login_required
 @user_passes_test(profile_data_check, '/profile/')
-def calendar(request, year, month):
+def calendar(request, year=None, month=None):
     """
     Given a year and a month, executes database queries, gets Workout list and allows the user to
     create new Workout, delete or update an existing one.
@@ -28,6 +31,7 @@ def calendar(request, year, month):
         if 'create' in request.POST:
             if form.is_valid():
                 obj = form.save(commit=False)
+                print(obj.date)
                 print(obj.id)
                 obj.user = request.user
                 obj.save()
@@ -43,10 +47,14 @@ def calendar(request, year, month):
                     workout.delete()
         return redirect('calendar')
     else:
+        path = request.path.split('/')
+        if len(path) > 3:
+            year = path[-2]
+            month = path[-1]
         now = datetime.datetime.now()
-        if len(month) == 0:
+        if month is None:
             month = now.month
-        if len(year) == 0:
+        if year is None:
             year = now.year
         month = int(month)
         year = int(year)
@@ -91,12 +99,10 @@ def display_form(request):
 
 
 def get_first_workout(user, date):
-    print('Get first workout')
     return Workout.objects.filter(user=user, date=date)[0]
 
 
 def get_all_user_workouts(year, month, day, user):
-    print('Get all user workouts')
     return Workout.objects.filter(date__year=year, date__month=month,
                                   date__day=day, user=user)
 
@@ -105,3 +111,24 @@ def get_workouts_for_calendar(year, month, user):
     return Workout.objects.order_by('id').filter(
         date__year=year, date__month=month, user=user
     )
+
+def change_month(request):
+    date_str = request.GET.get('date')
+    direction = request.GET.get('type')
+    date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+    if direction == 'next':
+        changed_date = date + relativedelta(months=1)
+    else:
+        changed_date = date - relativedelta(months=1)
+
+    to_send = {'month'  : changed_date.month,
+               'year'   : changed_date.year
+               }
+    return HttpResponse(json.dumps(to_send))
+
+def get_weight(request):
+    print('xd')
+    user = request.user
+    print(user.profile.weight)
+    to_send = { 'weight' : user.profile.weight}
+    return HttpResponse(json.dumps(to_send))
