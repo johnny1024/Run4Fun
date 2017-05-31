@@ -15,7 +15,9 @@ def index(request):
                'days': days_since_join(request.user),
                'distanceWhole': whole_ran_distance(request.user),
                'distanceWeekDone': weekly_run(request.user)[0],
-               'distanceWeekPlanned': weekly_run(request.user)[1]}
+               'distanceWeekPlanned': weekly_run(request.user)[1],
+               'doneTrainings': done_trainings(request.user)[0],
+               'allTrainings': done_trainings(request.user)[1]}
     return render_to_response('dashboard.html', context)
 
 
@@ -65,3 +67,22 @@ def weekly_run(user):
             if workout.done:
                 done += workout.distance
     return done, planned
+
+
+def done_trainings(user):
+    """
+    Method calculates number of all planned and all done trainings
+    
+    `user`: currently logged user
+    
+    Method return number of planned and done trainings
+    """
+    count_all = 0
+    count_done = 0
+    workouts = Workout.objects.filter(user=user)
+    for workout in workouts:
+        if workout.date < timezone.now():
+            count_all += 1
+            if workout.done:
+                count_done += 1
+    return count_done, count_all
