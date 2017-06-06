@@ -81,7 +81,7 @@ def done_trainings(user):
     count_done = 0
     workouts = Workout.objects.filter(user=user)
     for workout in workouts:
-        if workout.date < timezone.now():
+        if workout.date <= timezone.now().date():
             count_all += 1
             if workout.done:
                 count_done += 1
