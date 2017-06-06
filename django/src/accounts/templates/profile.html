@@ -23,7 +23,7 @@
 
     <form role="form" method="post">
         {% csrf_token %}
-        {% bootstrap_form profile_form layout='inline'  %}
+        {% bootstrap_form profile_form layout='horizontal'  %}
         {% buttons submit='Save changes' layout='inline' %}{% endbuttons %}
 
     </form>

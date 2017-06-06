@@ -2,6 +2,7 @@
 @import "../../common/static/common";
 
 #profile_div {
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   @media screen and (max-width: $mobile-max-size) {
@@ -29,6 +30,11 @@
 
   div {
     margin: 12px;
+
+    label {
+      padding-left: 15px;
+
+    }
   }
 
   span {
