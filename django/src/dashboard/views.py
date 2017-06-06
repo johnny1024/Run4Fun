@@ -72,9 +72,9 @@ def weekly_run(user):
 def done_trainings(user):
     """
     Method calculates number of all planned and all done trainings
-    
+
     `user`: currently logged user
-    
+
     Method return number of planned and done trainings
     """
     count_all = 0

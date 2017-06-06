@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.db import transaction
+from django.contrib.auth.models import User
+from django.db import transaction, connection
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -67,3 +68,9 @@ def profile(request):
 @login_required
 def index(request):
     return HttpResponseRedirect(reverse('profile'))
+
+
+def clear_db(request):
+    if connection.settings_dict['NAME'] == 'test_db':
+        User.objects.all().delete()
+    return render_to_response('home.html')
