@@ -67,10 +67,23 @@ def profile(request):
 
 @login_required
 def index(request):
+    """
+    Redirects user to the profile page
+
+    `request`: request for this view.
+
+    Returns profile page if user accessed '/' and is logged
+    """
     return HttpResponseRedirect(reverse('profile'))
 
 
 def clear_db(request):
+    """
+    Removes all users and their data from database
+
+    `request`: request for this view.
+
+    """
     if connection.settings_dict['NAME'] == 'test_db':
         User.objects.all().delete()
     return render_to_response('home.html')

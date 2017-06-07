@@ -10,6 +10,11 @@ from accounts.views import profile_data_check
 @login_required
 @user_passes_test(profile_data_check, '/profile/')
 def index(request):
+    """
+    Renders dashboard page if users is logged and has profile information filled.
+
+    `request`: request for this view.
+    """
     context = {'page': request.resolver_match.url_name,
                'user': request.user,
                'days': days_since_join(request.user),
