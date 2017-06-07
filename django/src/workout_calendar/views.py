@@ -91,17 +91,36 @@ def display_form(request):
 
 
 def get_first_workout(user, date):
+    """
+    Returns first (ordered by date) workout having given user and date
+
+    `user`: users associated with the workout
+    `date`: date associated with the workout
+    """
     print('Get first workout')
     return Workout.objects.filter(user=user, date=date)[0]
 
 
 def get_all_user_workouts(year, month, day, user):
+    """
+    Returns a list of all workouts having given user, year, month and day
+
+    `year`: Year the user wants to display
+    `month`: Month the user wants to display
+    `day`: Day the user wants to display
+    """
     print('Get all user workouts')
     return Workout.objects.filter(date__year=year, date__month=month,
                                   date__day=day, user=user)
 
 
 def get_workouts_for_calendar(year, month, user):
+    """
+    Returns a list of all workouts having given user, year and month. Ordered by workout database ID.
+
+    `year`: Year the user wants to display
+    `month`: Month the user wants to display
+    """
     return Workout.objects.order_by('id').filter(
         date__year=year, date__month=month, user=user
     )
