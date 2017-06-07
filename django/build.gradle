@@ -86,7 +86,7 @@ task removeVirtualenvLeftovers {
 createVenvExecTask('runServer', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) &> server.log")
 createVenvExecTask('runServerFg', "(python -u manage.py runserver & echo \$! > ${projectDir}/server.pid) |& tee server.log")
 createVenvExecTask('runTests', "py.test --junitxml ${projectDir}/test_results.xml")
-createVenvExecTask('genDoc', "pdoc --html-dir ${buildDir}/docs --overwrite --html ${python.srcDir}")
+createVenvExecTask('genDoc', "PYTHONPATH=. pdoc --html-dir ${buildDir}/docs --overwrite --html ${python.srcDir}")
 
 createExecTask('killServer', "pkill -x python") // Kills all python processes, not only the server one
 //createExecTask('killServer', "kill -- -\$(ps -o pgid= \"\$(< ${projectDir}/server.pid)\" | grep -o '[0-9]*')")
