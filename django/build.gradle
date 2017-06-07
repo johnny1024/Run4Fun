@@ -133,5 +133,5 @@ matchingDirectories.each { module ->
     }
 }
 
-task compileAllScss(dependsOn: tasks.matching {Task cssTask -> cssTask.name.endsWith("Sass")})
+task compileAllScss(dependsOn: tasks.withType(org.kravemir.gradle.sass.SassCompileTask))
 assemble.dependsOn compileAllScss
