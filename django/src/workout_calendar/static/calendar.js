@@ -79,7 +79,7 @@ function getWorkoutByDate(date) {
                 $('textarea').val("");
                 $('input[name=runner]').val("");
                 $('input[type=number]').val("");
-                // $('input[name=title]').val("");
+                $('input[name=title]').val("");
                 // $
                 $('#id_done').prop("checked", false);
                 $('#addBt').show();
