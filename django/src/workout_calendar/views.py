@@ -133,6 +133,13 @@ def get_workouts_for_calendar(year, month, user):
 
 
 def change_month(request):
+    """
+    Method that allows the user to change the displayed month.
+
+    `request`: Http request
+
+    Method returns HttpResponse object with json with chosen month and year.
+    """
     date_str = request.GET.get('date')
     direction = request.GET.get('type')
     date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
@@ -148,7 +155,13 @@ def change_month(request):
 
 
 def get_weight(request):
-    print('xd')
+    """
+    Method that returns the user's weight.
+
+    `request`: Http request
+
+    Method returns HttpResponse object with json with user's weight.
+    """
     user = request.user
     print(user.profile.weight)
     to_send = {'weight': user.profile.weight}
