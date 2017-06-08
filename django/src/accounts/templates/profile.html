@@ -1,24 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
+<!--Load bootstrap-->
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block title %}Profile{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}" />
 {% endblock %}
 
 {% block content %}
 
-    <div id="profile_div">
-        <h2>Your profile</h2>
-        <p>Username: {{ user.username }}</p>
 
-        <form method="post">
-            {% csrf_token %}
-            {{ user.as_p }}
-            {{ profile_form.as_p }}
-            <button type="submit">Save changes</button>
-        </form>
+<div id="profile_div">
+    <h2>Your profile</h2>
+    <div>
+        {% bootstrap_label "Username :" %}
+        <span>{{ user.username }}</span>
     </div>
+
+    <form role="form" method="post">
+        {% csrf_token %}
+        {% bootstrap_form profile_form layout='horizontal'  %}
+        {% buttons submit='Save changes' layout='inline' %}{% endbuttons %}
+
+    </form>
+</div>
 
 {% endblock %}

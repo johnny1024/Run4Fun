@@ -1,10 +1,15 @@
 {% load static %}
+<!--Load bootstrap-->
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}" />
+
     {% block head %}
     {% endblock %}
     <title>{% block title %}Run4Fun{% endblock %}</title>
@@ -26,7 +31,9 @@
     </div>
     <div>
         {% if user.is_authenticated and user.profile.age == None %}
-            <div id="profile_alert">Please fill your profile information before accessing the site.</div>
+        <div class="alert alert-danger" role="alert">
+            Please fill your profile information before accessing the site.
+        </div>
         {% endif %}
     </div>
     {% block content %}
