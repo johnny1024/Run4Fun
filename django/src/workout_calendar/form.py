@@ -4,6 +4,9 @@ from workout_calendar.models import Workout
 
 
 class WorkoutForm(forms.ModelForm):
+    """
+    Form that allows the user to modify and save Workouts.
+    """
     calories = forms.IntegerField()
     time = forms.IntegerField()
 
