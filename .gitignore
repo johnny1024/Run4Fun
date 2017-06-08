@@ -209,7 +209,8 @@ activate
 server.pid
 pinned.txt
 db.sqlite3
-.idea
+.idea/*
+!.idea/runConfigurations
 test_results.xml
 *.css
 *.css.map

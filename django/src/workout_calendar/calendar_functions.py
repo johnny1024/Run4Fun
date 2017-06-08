@@ -44,9 +44,7 @@ class WorkoutCalendar(HTMLCalendar):
                     body.append(self.create_day_with_workouts(workout))
                 body.append('<div hidden class=\'training\'>Click to see the trainings!</div>')
                 body.append('</div>')
-                # print("FINAL ccs_class" + " " +  cssclass)
                 return self.day_cell(cssclass, cssid, '%d %s' % (day, ''.join(body)))
-            # print("FINAL ccs_class" + " " + cssclass)
             return self.day_cell(cssclass, cssid, day)
         return self.day_cell_no_id('noday', '&nbsp;')
 
@@ -107,9 +105,9 @@ class WorkoutCalendar(HTMLCalendar):
         Method returns a HTML sample that represents a formatted div.
         """
         body = '<div class=workout_info id=' + str(workout.id) + '><ul>'
-        body += '<li>User: ' + workout.user.username
-        body += "</li><li>"
-        body += 'Workout: ' + esc(workout.comment)
+        body += '<li>' + workout.title
+        body += "<li>"
+        body += esc(workout.distance) + ' km'
         body += '</li></ul></div>'
 
         return body

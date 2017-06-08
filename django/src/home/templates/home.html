@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+{% endblock %}
 
 {% block content %}
-<div>You are at dashboard index!</div>
+<div>
+    <img src="{% static 'images/run.jpg' %}" alt="Hi!" />
+</div>
 {% endblock %}
+

@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Dashboard{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+
 {% block content %}
-    <div>You are at dashboard index!</div>
+    <div class="dashboardItem">Hello {{user.username}}!</div>
+    <div class="dashboardItem">You are with us {{days}} day(s)!</div>
+    <div class="dashboardItem">In this time you have run {{distanceWhole}} kilometers!</div>
+    <div class="dashboardItem">And you completed {{doneTrainings}} trainings out of {{allTrainings}} planned!</div>
+    <div class="dashboardItem">During this week you have already run {{distanceWeekDone}} of {{distanceWeekPlanned}} planned kilometers.</div>
 {% endblock %}

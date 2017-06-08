@@ -1,0 +1,60 @@
+@import "../../common/static/master";
+@import "../../common/static/common";
+
+#profile_div {
+  margin: 10px;
+  border: 1px solid $blue-green;
+  border-radius: 4px;
+  background-color: $background-beige;
+
+  h2 {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    color: $background-beige;
+    text-align: center;
+
+    background-color: $blue-green;
+    font-family: $basic-font-family;
+  }
+
+  p {
+    width: 50%;
+    padding: 12px 20px;
+    display: block;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+
+    border: 1px solid $pink;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+
+    font-family: $basic-font-family;
+  }
+
+  form {
+    button {
+      display: block;
+      position: relative;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 12px 20px;
+      background-color: $blue-green;
+      border: none;
+      color: white;
+      cursor: pointer;
+
+      font-family: $basic-font-family;
+    }
+
+    button:hover {
+      background-color: $darker-blue;
+    }
+  }
+}
+
+
