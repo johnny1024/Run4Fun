@@ -76,12 +76,36 @@ class WorkoutCalendar(HTMLCalendar):
         )
 
     def day_cell(self, cssclass, cssid, body):
+        """
+        Method that formats the div for the day that has id.
+
+        `cssclass`: class name to be applied in this div
+        `cssid`: id to be applied in this div
+        `body`: content of the div
+
+        Method returns a HTML sample that represents a formatted div.
+        """
         return '<td class="%s" id="%s">%s</td>' % (cssclass, cssid, body)
 
     def day_cell_no_id(self, cssclass, body):
+        """
+        Method that formats the div for the day with no id.
+
+        `cssclass`: class name to be applied in this div
+        `body`: content of the div
+
+        Method returns a HTML sample that represents a formatted div.
+        """
         return '<td class="%s">%s</td>' % (cssclass, body)
 
     def create_day_with_workouts(self, workout):
+        """
+        Method that adds workout information to the div.
+
+        `workout`: Workout object that should be added to the div
+
+        Method returns a HTML sample that represents a formatted div.
+        """
         body = '<div class=workout_info id=' + str(workout.id) + '><ul>'
         body += '<li>User: ' + workout.user.username
         body += "</li><li>"
@@ -91,6 +115,13 @@ class WorkoutCalendar(HTMLCalendar):
         return body
 
     def format_one_digit(self, string_to_format):
+        """
+        Method that formats input string to be a valid month string.
+
+        `string_to_format`: a string that represents the month number
+
+        Method returns a formatted string.
+        """
         string_to_format = str(string_to_format)
         if len(string_to_format) < 2:
             return '0' + string_to_format
