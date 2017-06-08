@@ -6,6 +6,8 @@ from datetime import timedelta
 
 from accounts.views import profile_data_check
 
+import requests
+
 
 @login_required
 @user_passes_test(profile_data_check, '/profile/')
@@ -91,3 +93,18 @@ def done_trainings(user):
             if workout.done:
                 count_done += 1
     return count_done, count_all
+
+
+def get_temperature():
+    """
+    Method that gets the current temperature in Poznan from Open Weather API.
+
+    Method returns current temperature in Celsius degrees.
+    """
+    API_KEY = '9a0e5de6bf9fbbf49481d6df5e81c320'
+    POZNAN_CODE = '3088171'
+    r = requests.get(
+        'http://api.openweathermap.org/data/2.5/forecast?id=%s&APPID=%s&units=metric' % (POZNAN_CODE, API_KEY))
+    main_json = (r.json()['list'])
+    temperature = main_json[0]["main"]["temp"]
+    return temperature
