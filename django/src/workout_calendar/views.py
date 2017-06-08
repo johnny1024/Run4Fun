@@ -1,12 +1,10 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User
-from django.urls import reverse
 from django.utils.safestring import mark_safe
 from workout_calendar.form import WorkoutForm
 from accounts.views import profile_data_check
 from .calendar_functions import WorkoutCalendar
 from .models import Workout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import json
 import datetime
@@ -133,6 +131,7 @@ def get_workouts_for_calendar(year, month, user):
         date__year=year, date__month=month, user=user
     )
 
+
 def change_month(request):
     date_str = request.GET.get('date')
     direction = request.GET.get('type')
@@ -142,14 +141,15 @@ def change_month(request):
     else:
         changed_date = date - relativedelta(months=1)
 
-    to_send = {'month'  : changed_date.month,
-               'year'   : changed_date.year
+    to_send = {'month': changed_date.month,
+               'year': changed_date.year
                }
     return HttpResponse(json.dumps(to_send))
+
 
 def get_weight(request):
     print('xd')
     user = request.user
     print(user.profile.weight)
-    to_send = { 'weight' : user.profile.weight}
+    to_send = {'weight': user.profile.weight}
     return HttpResponse(json.dumps(to_send))

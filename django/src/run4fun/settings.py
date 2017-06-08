@@ -203,4 +203,3 @@ BOOTSTRAP3 = {
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
-
