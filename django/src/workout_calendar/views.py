@@ -27,43 +27,73 @@ def calendar(request, year=None, month=None):
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
         if 'create' in request.POST:
-            if form.is_valid():
-                obj = form.save(commit=False)
-                print(obj.date)
-                print(obj.id)
-                obj.user = request.user
-                obj.save()
-                return redirect('calendar')
+            post_request_create(request, form)
         else:
-            if form.is_valid():
-                obj = form.save(commit=False)
-                workout = get_first_workout(request.user, obj.date)
-                if 'update' in request.POST:
-                    f = WorkoutForm(request.POST, instance=workout)
-                    f.save()
-                elif 'delete' in request.POST:
-                    workout.delete()
+            post_request_update_delete(request, form)
         return redirect('calendar')
     else:
-        path = request.path.split('/')
-        if len(path) > 3:
-            year = path[-2]
-            month = path[-1]
-        now = datetime.datetime.now()
-        if month is None:
-            month = now.month
-        if year is None:
-            year = now.year
-        month = int(month)
-        year = int(year)
-        my_workouts = get_workouts_for_calendar(year, month, request.user)
-        form = WorkoutForm()
-        cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
-        context = {'page': request.resolver_match.url_name,
-                   'user': request.user,
-                   'calendar': mark_safe(cal),
-                   'form': form}
+        context = prepare_context(request, month, year)
         return render(request, 'calendar.html', context)
+
+
+def post_request_create(request, form):
+    """
+    Method that parses create POST request.
+
+    `request` HttpRequest
+
+    Method redirects to calendar view.
+    """
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.user = request.user
+        obj.save()
+        return redirect('calendar')
+
+
+def post_request_update_delete(request, form):
+    """
+    Method that parses update and delete POST requests.
+
+    `request` HttpRequest
+
+    Method updates or deletes workout from the calendar.
+    """
+    if form.is_valid():
+        obj = form.save(commit=False)
+        workout = get_first_workout(request.user, obj.date)
+        if 'update' in request.POST:
+            f = WorkoutForm(request.POST, instance=workout)
+            f.save()
+        elif 'delete' in request.POST:
+            workout.delete()
+
+
+def prepare_context(request, month, year):
+    """
+    Method finds Workouts for the calendar and returns the context json.
+
+    Method returns json with request context.
+    """
+    path = request.path.split('/')
+    if len(path) > 3:
+        year = path[-2]
+        month = path[-1]
+    now = datetime.datetime.now()
+    if month is None:
+        month = now.month
+    if year is None:
+        year = now.year
+    month = int(month)
+    year = int(year)
+    my_workouts = get_workouts_for_calendar(year, month, request.user)
+    form = WorkoutForm()
+    cal = WorkoutCalendar(my_workouts).formatmonth(year, month)
+    context = {'page': request.resolver_match.url_name,
+               'user': request.user,
+               'calendar': mark_safe(cal),
+               'form': form}
+    return context
 
 
 def display_form(request):

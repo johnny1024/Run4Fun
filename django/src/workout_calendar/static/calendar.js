@@ -151,14 +151,16 @@ function calculate(type, weight) {
         calories = parseInt($('#id_calories').val());
         distance = calories / weight;
         time = distance / velocity;
-    } else {
+    } else if (type === 'time'){
         time = parseInt($('#id_time').val());
+        console.log(time);
         distance = time * velocity;
+        console.log(distance);
         calories = weight * distance;
     }
     calories = Math.round(calories);
     distance = Math.round(distance);
-    time = (Math.round(time*60));
+    time = (Math.round(time));
     console.log(time, calories, distance);
     $('#id_calories').val(calories);
     $('#id_distance').val(distance);
