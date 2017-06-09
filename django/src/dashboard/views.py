@@ -24,7 +24,8 @@ def index(request):
                'distanceWeekDone': weekly_run(request.user)[0],
                'distanceWeekPlanned': weekly_run(request.user)[1],
                'doneTrainings': done_trainings(request.user)[0],
-               'allTrainings': done_trainings(request.user)[1]}
+               'allTrainings': done_trainings(request.user)[1],
+               'temperature': get_temperature()}
     return render_to_response('dashboard.html', context)
 
 
