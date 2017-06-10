@@ -212,5 +212,3 @@ db.sqlite3
 .idea/*
 !.idea/runConfigurations
 test_results.xml
-*.css
-*.css.map

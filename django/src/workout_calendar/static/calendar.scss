@@ -9,7 +9,9 @@ html, body {
 
 #wrapper {
   width: 80%;
-  height: 100%;
+  height: 60%;
+  min-height: 600px;
+  max-width: 1300px;
   overflow: hidden;
   //border: 0.5px solid red;
   //display: inline-block;
@@ -26,6 +28,9 @@ html, body {
     height: 100%;
     float: left;
     overflow: auto;
+    max-height: 100%;
+    min-height: 100%;
+
 
     table {
       position: relative;
@@ -42,6 +47,7 @@ html, body {
       }
 
       td {
+        position: relative;
         background: $background-beige;
         color: $blue-green;
         border: 0.5px solid $blue-green;
@@ -194,5 +200,4 @@ html, body {
     background-color: $background-beige;
     margin: 10px;
   }
-
 }

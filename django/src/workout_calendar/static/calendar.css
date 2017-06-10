@@ -1,0 +1,178 @@
+/*@import "mystyle.css";*/
+table {
+  display: table;
+  width: 80%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 0 auto;
+  border: 3px solid #048998;
+  padding-top: 20px; }
+
+th, td {
+  width: 100px;
+  height: 80px; }
+
+/* HEADER */
+th {
+  background: #048998;
+  color: #F6F5F5;
+  border: 0.5px solid #F6F5F5;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 32px;
+  margin: 0 0 72px; }
+
+html, body {
+  width: 100%; }
+
+#wrapper {
+  width: 80%;
+  height: 60%;
+  min-height: 600px;
+  max-width: 1300px;
+  overflow: hidden;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  text-align: center; }
+  #wrapper #calendar-container {
+    position: relative;
+    margin: 0;
+    width: 75%;
+    height: 100%;
+    float: left;
+    overflow: auto;
+    max-height: 100%;
+    min-height: 100%; }
+    #wrapper #calendar-container table {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%; }
+      #wrapper #calendar-container table th {
+        text-align: center; }
+      #wrapper #calendar-container table td {
+        position: relative;
+        background: #F6F5F5;
+        color: #048998;
+        border: 0.5px solid #048998;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        padding: 4px; }
+        #wrapper #calendar-container table td div.container {
+          padding: 0;
+          position: relative;
+          max-width: 100%; }
+          #wrapper #calendar-container table td div.container div.workout_info {
+            margin: 0;
+            padding: 2px;
+            position: relative;
+            max-width: 100%;
+            word-wrap: break-word;
+            width: 100px;
+            overflow-y: hidden;
+            color: #04646f;
+            font-family: "Open Sans", sans-serif;
+            font-size: 12px;
+            text-align: left; }
+            #wrapper #calendar-container table td div.container div.workout_info ul {
+              padding: 0;
+              margin: 0;
+              position: relative; }
+              #wrapper #calendar-container table td div.container div.workout_info ul li {
+                padding: 0;
+                margin: 0;
+                position: relative; }
+      #wrapper #calendar-container table td.today {
+        background: #ED5485;
+        color: #F6F5F5; }
+      #wrapper #calendar-container table td.filled {
+        background: #3BB4C1;
+        color: #F6F5F5; }
+      #wrapper #calendar-container table td:hover {
+        background: #F6F5F5;
+        color: #048998; }
+  #wrapper #form-container {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    margin: 0;
+    float: left;
+    border: 3px solid #048998;
+    max-height: 100%;
+    min-height: 100%;
+    overflow: auto; }
+    #wrapper #form-container #form-header {
+      background: #048998;
+      color: #F6F5F5;
+      font-family: "Open Sans", sans-serif;
+      font-size: 20px;
+      font-weight: 200;
+      height: 80px;
+      position: relative;
+      padding: 10%;
+      text-align: center; }
+    #wrapper #form-container form {
+      color: #ED5485;
+      font-family: "Open Sans", sans-serif;
+      font-size: 14px;
+      font-weight: 300; }
+      #wrapper #form-container form input {
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        color: #ED5485;
+        font-family: "Open Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 300; }
+      #wrapper #form-container form textarea {
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #F6F5F5;
+        color: #ED5485;
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: left;
+        margin: 0;
+        resize: none; }
+      #wrapper #form-container form input[type=button], #wrapper #form-container form input[type=submit], #wrapper #form-container form input[type=reset] {
+        background-color: #048998;
+        border: none;
+        color: white;
+        margin: 1.5px;
+        text-decoration: none;
+        cursor: pointer;
+        vertical-align: middle;
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: center; }
+      #wrapper #form-container form input[type=checkbox] {
+        text-align: left;
+        display: inline-block;
+        vertical-align: middle; }
+
+#button_wrapper {
+  width: 80%;
+  overflow: hidden;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  text-align: center; }
+  #button_wrapper .btn {
+    color: #048998;
+    width: 20%;
+    border: 2px solid #048998;
+    border-radius: 4px;
+    background-color: #F6F5F5;
+    margin: 10px; }
+
+/*# sourceMappingURL=calendar.css.map */
