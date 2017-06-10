@@ -132,7 +132,6 @@ function getWeight(type) {
         type: "GET",
         success: function () {
             response_args = JSON.parse(arguments[0]);
-            console.log(response_args.weight);
             calculate(type, response_args.weight);
         }
     })
@@ -152,15 +151,13 @@ function calculate(type, weight) {
         distance = calories / weight;
         time = distance / velocity;
     } else if (type === 'time'){
-        time = parseInt($('#id_time').val());
-        console.log(time);
+        time = Math.round(parseInt($('#id_time').val()/60));
         distance = time * velocity;
-        console.log(distance);
         calories = weight * distance;
     }
     calories = Math.round(calories);
     distance = Math.round(distance);
-    time = (Math.round(time));
+    time = (Math.round(time*60));
     console.log(time, calories, distance);
     $('#id_calories').val(calories);
     $('#id_distance').val(distance);
