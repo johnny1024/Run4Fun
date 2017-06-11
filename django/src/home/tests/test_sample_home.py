@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 
 
-class TestingClass(TestCase):
+class TestHome(TestCase):
     def test_user_logged(self):
         client = Client()
         User.objects.create_user(username='testUser', password='testingPassword')
